@@ -1,10 +1,13 @@
 <?php
 
-const CSS = "assets/css/";
-const JS = "assets/js/";
-const IMG = "assets/img/";
-const TMP = "assets/templates/";
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Content-Type: application/json");
 
-require_once TMP . "top.php";
-require_once "router.php";
-require_once TMP . "bottom.php";
+const IMG = "assets/img/";
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') 
+{
+    require_once "router.php";
+}
