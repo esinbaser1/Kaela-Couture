@@ -3,6 +3,7 @@
 namespace Models;
 
 use App\Database;
+/* ********* Class Login Signup user signup functionality ********* */
 
 class Signup 
 {
@@ -10,7 +11,8 @@ class Signup
 
     public function __construct()
     {
-        $this->db = new Database();
+        $database = new Database();
+        $this->db = $database->getConnection();
     }
 
     public function createUser()
@@ -47,7 +49,7 @@ class Signup
         try 
         {
             $request = "INSERT INTO user (username, email, password) VALUES (?,?,?)";
-            $pdo = $this->db->getConnection()->prepare($request);
+            $pdo = $this->db->prepare($request);
             $pdo->execute([$username, $email, $passwordHash]);
 
             return ["success" => true, "message" => "User created successfully"];
@@ -60,12 +62,12 @@ class Signup
     }
 
     private function emailExists($email) {
-        $pdo = $this->db->getConnection()->prepare("SELECT COUNT(*) FROM user WHERE email = ?");
+        $pdo = $this->db->prepare("SELECT COUNT(*) FROM user WHERE email = ?");
         $pdo->execute([$email]);
         return $pdo->fetchColumn() > 0;
     }
     private function usernameExists($username) {
-        $pdo = $this->db->getConnection()->prepare("SELECT COUNT(*) FROM user WHERE username = ?");
+        $pdo = $this->db->prepare("SELECT COUNT(*) FROM user WHERE username = ?");
         $pdo->execute([$username]);
         return $pdo->fetchColumn() > 0;
     }

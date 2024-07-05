@@ -7,3 +7,12 @@ RewriteRule ^signup$ index.php?action=signup [L,QSA]
 
 # URL rewriting for login
 RewriteRule ^login$ index.php?action=login [L,QSA]
+
+# URL rewriting for contact
+RewriteRule ^contact$ index.php?action=contact [L,QSA]
+
+# URL rewriting for adminAddProduct
+RewriteRule ^adminAddProduct$ index.php?action=adminAddProduct [L,QSA]
+
+# URL rewriting for getCategorie
+RewriteRule ^getCategorie$ index.php?action=getCategorie [L,QSA]
