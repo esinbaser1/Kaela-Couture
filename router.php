@@ -6,8 +6,9 @@ use Models\Signup;
 use Models\Login;
 use Models\Contact;
 use Models\AdminAddProduct;
-use Models\AdminSelectProductModify;
 use Models\AdminModifyProduct;
+use Models\AdminProduct;
+use Models\AdminDeleteProduct;
 
 $action = $_REQUEST['action'] ?? null;
 
@@ -29,7 +30,12 @@ switch ($action) {
         $response = $contact->sendEmail();
         break;
 
-    case "adminAddProduct":
+    case "productDisplay":
+        $productDisplay = new AdminProduct();
+        $response = $productDisplay->getProductAndCategorie();
+        break;
+
+    case "addProduct":
         $adminAddProduct = new AdminAddProduct();
         $response = $adminAddProduct->addProduct();
         break;
@@ -39,34 +45,20 @@ switch ($action) {
         $response = $adminAddProduct->getCategorie();
         break;
 
-    case "adminSelectProductModify":
-        $adminSelectProductModify = new AdminSelectProductModify();
-        $response = $adminSelectProductModify->getProduct();
+    case "getProduct":
+        $getProduct = new AdminModifyProduct();
+        $response = $getProduct->getProductById();
         break;
 
-    case "getProduct":
-        $productId = $_GET['productId'] ?? null;
-        if ($productId) {
-            $getProduct = new AdminModifyProduct();
-            $response = $getProduct->getProductById($productId);
-        } else {
-            $response = ["success" => false, "message" => "Product ID missing"];
-        }
-        break;
 
     case "updateProduct":
-        $productId = $_POST['productId'] ?? null;
-        if ($productId) {
-            $productName = $_POST['productName'] ?? '';
-            $productDescription = $_POST['productDescription'] ?? '';
-            $productCategory = $_POST['productCategory'] ?? '';
-            $productImage = $_FILES['productImage'] ?? null;
+        $adminUpdateProduct = new AdminModifyProduct();
+        $response = $adminUpdateProduct->updateProduct();
+        break;
 
-            $adminUpdateProduct = new AdminModifyProduct();
-            $response = $adminUpdateProduct->updateProduct($productId, $productName, $productDescription, $productCategory, $productImage);
-        } else {
-            $response = ["success" => false, "message" => "Product ID missing"];
-        }
+    case "deleteProduct":
+        $adminDeleteProduct = new AdminDeleteProduct();
+        $response = $adminDeleteProduct->deleteProduct();
         break;
 }
 

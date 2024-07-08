@@ -18,6 +18,10 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
     );
 
     public static $prefixLengthsPsr4 = array (
+        'T' => 
+        array (
+            'Traits\\' => 7,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
@@ -55,6 +59,10 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
             'Doctrine\\Deprecations\\' => 22,
             'Doctrine\\Common\\Lexer\\' => 22,
         ),
+        'C' => 
+        array (
+            'Components\\' => 11,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -62,6 +70,10 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
     );
 
     public static $prefixDirsPsr4 = array (
+        'Traits\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models/Traits',
+        ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
@@ -125,6 +137,10 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         'Doctrine\\Common\\Lexer\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/lexer/src',
+        ),
+        'Components\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Components',
         ),
         'App\\' => 
         array (

@@ -4,9 +4,11 @@ namespace Models;
 
 use App\Database;
 use Lib\Slug;
+use Components\ConvertToWebP;
 
 class AdminModifyProduct
 {
+
     protected $db;
     protected $slug;
 
@@ -17,8 +19,14 @@ class AdminModifyProduct
         $this->slug = new Slug();
     }
 
-    public function getProductById($productId)
+    public function getProductById()
     {
+        $productId = $_GET['productId'] ?? null;
+
+        if (!$productId) {
+            return ["success" => false, "message" => "Product ID missing"];
+        }
+
         try {
             $request = "SELECT * FROM image WHERE id = ?";
             $pdo = $this->db->prepare($request);
@@ -63,7 +71,8 @@ class AdminModifyProduct
                         return ["success" => false, "message" => "Failed to move uploaded file"];
                     }
     
-                    $webpImagePath = $this->convertToWebP($tempImagePath, $imageLocation, $productSlug, $productCategory);
+                    $converter = new ConvertToWebP();
+                    $webpImagePath = $converter->convertToWebP($tempImagePath, $imageLocation, $productSlug, $productCategory);
     
                     if (!$webpImagePath) 
                     {
@@ -82,12 +91,11 @@ class AdminModifyProduct
                 } 
                 else 
                 {
-                    //ancien chemin d'image si aucune nouvelle image n'est téléchargée
                     $request = "SELECT path FROM image WHERE id = ?";
                     $pdo = $this->db->prepare($request);
                     $pdo->execute([$productId]);
                     $existingProduct = $pdo->fetch();
-                    $imagePath = $existingProduct['path'];  //l'image existante est utilisée
+                    $imagePath = $existingProduct['path'];
                 }
     
                 $request = "UPDATE image SET name = ?, description = ?, path = ?, slug = ?, categorie_id = ? WHERE id = ?";
@@ -106,30 +114,6 @@ class AdminModifyProduct
         else 
         {
             return ["success" => false, "message" => "Product ID missing"];
-        }
-    }
-    private function convertToWebP($source, $destination, $productSlug, $categoryId, $quality = 80)
-    {
-        $image = imagecreatefromstring(file_get_contents($source));
-        if ($image !== false) 
-        {
-            $webpImagePath = $destination . $productSlug . '-' . $categoryId . '.webp';
-
-            if (imagewebp($image, $webpImagePath, $quality)) 
-            {
-                imagedestroy($image);
-                unlink($source);
-                return $webpImagePath;
-            } 
-            else 
-            {
-                imagedestroy($image);
-                return false;
-            }
-        } 
-        else 
-        {
-            return false;
         }
     }
 }

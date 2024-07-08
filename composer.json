@@ -6,7 +6,9 @@
         "psr-4": {
             "App\\": "App/",
             "Models\\": "App/Models/",
-             "Lib\\": "lib/"
+            "Lib\\": "lib/",
+            "Traits\\": "App/Models/Traits/",
+            "Components\\": "App/Components/"
         }
     },
     "authors": [

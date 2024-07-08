@@ -14,8 +14,7 @@ class Database {
         $this->cnx = new \PDO("mysql:host=$this->host;dbname=$this->db", $this->login, $this->pw);
         $this->cnx->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     }
-
-    // méthode publique pour récupérer la connexion à la bdd
+    
     public function getConnection() {
         return $this->cnx;
     }

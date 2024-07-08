@@ -11,8 +11,20 @@ RewriteRule ^login$ index.php?action=login [L,QSA]
 # URL rewriting for contact
 RewriteRule ^contact$ index.php?action=contact [L,QSA]
 
+# URL rewriting for productDisplay
+RewriteRule ^productDisplay$ index.php?action=productDisplay [L,QSA]
+
 # URL rewriting for adminAddProduct
-RewriteRule ^adminAddProduct$ index.php?action=adminAddProduct [L,QSA]
+RewriteRule ^addProduct$ index.php?action=addProduct [L,QSA]
 
 # URL rewriting for getCategorie
 RewriteRule ^getCategorie$ index.php?action=getCategorie [L,QSA]
+
+# URL rewriting for updateProduct
+RewriteRule ^updateProduct$ index.php?action=updateProduct [L,QSA]
+
+# URL rewriting for getProduct
+RewriteRule ^getProduct/([0-9]+)$ index.php?action=getProduct&productId=$1 [L,QSA]
+
+# URL rewriting for deleteProduct
+RewriteRule ^deleteProduct$ index.php?action=deleteProduct [L,QSA]
