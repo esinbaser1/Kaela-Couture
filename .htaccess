@@ -11,20 +11,29 @@ RewriteRule ^login$ index.php?action=login [L,QSA]
 # URL rewriting for contact
 RewriteRule ^contact$ index.php?action=contact [L,QSA]
 
-# URL rewriting for productDisplay
-RewriteRule ^productDisplay$ index.php?action=productDisplay [L,QSA]
+# URL rewriting for productDisplay (admin)
+RewriteRule ^productDisplay$ index.php?adminAction=productDisplay [L,QSA]
 
-# URL rewriting for adminAddProduct
-RewriteRule ^addProduct$ index.php?action=addProduct [L,QSA]
+# URL rewriting for adminAddProduct (admin)
+RewriteRule ^addProduct$ index.php?adminAction=addProduct [L,QSA]
 
-# URL rewriting for getCategorie
-RewriteRule ^getCategorie$ index.php?action=getCategorie [L,QSA]
+# URL rewriting for getCategorie (admin)
+RewriteRule ^getCategorie$ index.php?adminAction=getCategorie [L,QSA]
 
-# URL rewriting for updateProduct
-RewriteRule ^updateProduct$ index.php?action=updateProduct [L,QSA]
+# URL rewriting for updateProduct (admin)
+RewriteRule ^updateProduct$ index.php?adminAction=updateProduct [L,QSA]
 
-# URL rewriting for getProduct
-RewriteRule ^getProduct/([0-9]+)$ index.php?action=getProduct&productId=$1 [L,QSA]
+# URL rewriting for getProduct (admin)
+RewriteRule ^getProduct/([0-9]+)$ index.php?adminAction=getProduct&productId=$1 [L,QSA]
 
-# URL rewriting for deleteProduct
-RewriteRule ^deleteProduct$ index.php?action=deleteProduct [L,QSA]
+# URL rewriting for deleteProduct (admin)
+RewriteRule ^deleteProduct$ index.php?adminAction=deleteProduct [L,QSA]
+
+# URL rewriting for adminInformation (admin)
+RewriteRule ^adminInformation$ index.php?adminAction=adminInformation [L,QSA]
+
+# URL rewriting for adminAddInformation (admin)
+RewriteRule ^adminAddInformation$ index.php?adminAction=adminAddInformation [L,QSA]
+
+# # URL rewriting for getImage (admin)
+# RewriteRule ^getImage$ index.php?adminAction=getImage [L,QSA]

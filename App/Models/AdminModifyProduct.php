@@ -19,6 +19,12 @@ class AdminModifyProduct
         $this->slug = new Slug();
     }
 
+    private function deleteOldImage($imagePath) {
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+    }
+
     public function getProductById()
     {
         $productId = $_GET['productId'] ?? null;
@@ -60,9 +66,19 @@ class AdminModifyProduct
             try 
             {
                 $productSlug = $this->slug->sluguer($productName);
-    
+                $imagePath = '';
+
                 if ($productImage) 
                 {
+                    $request = "SELECT path FROM image WHERE id = ?";
+                    $pdo = $this->db->prepare($request);
+                    $pdo->execute([$productId]);
+                    $existingProduct = $pdo->fetch();
+                    
+                    if ($existingProduct) {
+                        $this->deleteOldImage("assets/img/" . $existingProduct['path']);
+                    }
+
                     $imageLocation = "assets/img/";
                     $tempImagePath = $imageLocation . basename($productImage['name']);
     

@@ -28,12 +28,32 @@ class AdminDeleteProduct
 
         try 
         {
+            // Récupérer le chemin de l'image
+            $request = "SELECT path FROM image WHERE id = ?";
+            $pdo = $this->db->prepare($request);
+            $pdo->execute([$productId]);
+            $product = $pdo->fetch();
+
+            if (!$product) 
+            {
+                return ["success" => false, "message" => "Product not found"];
+            }
+
+            $imagePath = 'assets/img/' . $product['path'];
+
+            // Supprimer l'entrée de la base de données
             $request = "DELETE FROM image WHERE id = ?";
             $pdo = $this->db->prepare($request);
             $pdo->execute([$productId]);
 
             if ($pdo->rowCount() > 0) 
             {
+                // Supprimer le fichier image du système de fichiers
+                if (file_exists($imagePath)) 
+                {
+                    unlink($imagePath);
+                }
+
                 return ["success" => true, "message" => "Product deleted successfully"];
             } 
             else 
