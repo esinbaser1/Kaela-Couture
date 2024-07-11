@@ -115,6 +115,7 @@ class AdminModifyProduct
                 }
     
                 $request = "UPDATE image SET name = ?, description = ?, path = ?, slug = ?, categorie_id = ? WHERE id = ?";
+                
                 $pdo = $this->db->prepare($request);
                 $pdo->execute([$productName, $productDescription, $imagePath, $productSlug, $productCategory, $productId]);
     

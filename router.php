@@ -9,9 +9,10 @@ use Models\AdminAddProduct;
 use Models\AdminModifyProduct;
 use Models\AdminProduct;
 use Models\AdminDeleteProduct;
-// use Models\AdminGetImage;
 use Models\AdminInformation;
 use Models\AdminAddInformation;
+use Models\AdminInformationModify;
+use Models\AdminDeleteInformation;
 
 $action = $_REQUEST['action'] ?? null;
 
@@ -77,10 +78,20 @@ switch ($action) {
                 $response = $adminAddInformation->addInformation();
                 break;
 
-            // case "getImage":
-            //     $adminProduct = new AdminGetImage();
-            //     $response = $adminProduct->getImage();
-            //     break;
+            case "getInformation":
+                $getInformation = new AdminInformationModify();
+                $response = $getInformation->getInformationById();
+                break;
+
+            case "updateInformation":
+                $adminUpdateInformation = new AdminInformationModify();
+                $response = $adminUpdateInformation->updateInformation();
+                break;
+
+            case "deleteInformation":
+                $adminDeleteInformation = new AdminDeleteInformation();
+                $response = $adminDeleteInformation->deleteInformation();
+                break;
 
             default:
                 $response = ["success" => false, "message" => "Admin action not found"];

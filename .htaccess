@@ -20,11 +20,11 @@ RewriteRule ^addProduct$ index.php?adminAction=addProduct [L,QSA]
 # URL rewriting for getCategorie (admin)
 RewriteRule ^getCategorie$ index.php?adminAction=getCategorie [L,QSA]
 
-# URL rewriting for updateProduct (admin)
-RewriteRule ^updateProduct$ index.php?adminAction=updateProduct [L,QSA]
-
 # URL rewriting for getProduct (admin)
 RewriteRule ^getProduct/([0-9]+)$ index.php?adminAction=getProduct&productId=$1 [L,QSA]
+
+# URL rewriting for updateProduct (admin)
+RewriteRule ^updateProduct$ index.php?adminAction=updateProduct [L,QSA]
 
 # URL rewriting for deleteProduct (admin)
 RewriteRule ^deleteProduct$ index.php?adminAction=deleteProduct [L,QSA]
@@ -35,5 +35,11 @@ RewriteRule ^adminInformation$ index.php?adminAction=adminInformation [L,QSA]
 # URL rewriting for adminAddInformation (admin)
 RewriteRule ^adminAddInformation$ index.php?adminAction=adminAddInformation [L,QSA]
 
-# # URL rewriting for getImage (admin)
-# RewriteRule ^getImage$ index.php?adminAction=getImage [L,QSA]
+# URL rewriting for getInformation (admin)
+RewriteRule ^getInformation/([0-9]+)$ index.php?adminAction=getInformation&informationId=$1 [L,QSA]
+
+# URL rewriting for updateInformation (admin)
+RewriteRule ^updateInformation$ index.php?adminAction=updateInformation [L,QSA]
+
+# URL rewriting for deleteInformation (admin)
+RewriteRule ^deleteInformation$ index.php?adminAction=deleteInformation [L,QSA]
