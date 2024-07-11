@@ -7,7 +7,6 @@ use App\Database;
 class AdminInformation
 {
     protected $db;
-    protected $slug;
 
     public function __construct()
     {
@@ -18,18 +17,13 @@ class AdminInformation
     public function getInformations()
     {
         try {
-
             $request = "SELECT * FROM about_me";
             $pdo = $this->db->query($request);
             $information = $pdo->fetchAll();
 
             return ["success" => true, "information" => $information];
-
-        } 
-        catch (\PDOException $e) 
-        {
-            error_log("Error when retrieving images: " . $e->getMessage());
-
+        } catch (\PDOException $e) {
+            error_log("Error when retrieving information: " . $e->getMessage());
             return ["success" => false, "message" => "Database error"];
         }
     }

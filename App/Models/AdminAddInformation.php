@@ -7,7 +7,6 @@ use App\Database;
 class AdminAddInformation
 {
     protected $db;
-    protected $slug;
 
     public function __construct()
     {
@@ -28,25 +27,15 @@ class AdminAddInformation
             return ["success" => false, "message" => "Invalid mobile number format"];
         }
 
-        try
-        {
-            $request = "INSERT INTO about_me (description, mobile, address) VALUES (?,?,?)";
+        try {
+            $request = "INSERT INTO about_me (description, mobile, address) VALUES (?, ?, ?)";
             $pdo = $this->db->prepare($request);
             $pdo->execute([$description, $mobile, $address]);
 
-            return ["success" => true, "message" => "Information added successfully"];
-
-        }
-
-        catch (\PDOException $e) 
-        {
+            return ["success" => true, "message" => "Information added successfully!!!", "information" => $pdo->fetch()];
+        } catch (\PDOException $e) {
             error_log("Error when creating information: " . $e->getMessage());
-
             return ["success" => false, "message" => "Database error"];
         }
-        
     }
-
-
-
 }

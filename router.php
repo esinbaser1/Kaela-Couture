@@ -79,8 +79,13 @@ switch ($action) {
                 break;
 
             case "getInformation":
-                $getInformation = new AdminInformationModify();
-                $response = $getInformation->getInformationById();
+                $informationId = $_REQUEST['informationId'] ?? null;
+                if ($informationId) {
+                    $getInformation = new AdminInformationModify();
+                    $response = $getInformation->getInformationById($informationId);
+                } else {
+                    $response = ["success" => false, "message" => "Information ID missing"];
+                }
                 break;
 
             case "updateInformation":
@@ -89,8 +94,15 @@ switch ($action) {
                 break;
 
             case "deleteInformation":
-                $adminDeleteInformation = new AdminDeleteInformation();
-                $response = $adminDeleteInformation->deleteInformation();
+                $input = file_get_contents("php://input");
+                $data = json_decode($input, true);
+                $informationId = $data['informationId'] ?? null;
+                if ($informationId) {
+                    $adminDeleteInformation = new AdminDeleteInformation();
+                    $response = $adminDeleteInformation->deleteInformation($informationId);
+                } else {
+                    $response = ["success" => false, "message" => "Information ID missing"];
+                }
                 break;
 
             default:

@@ -14,35 +14,23 @@ class AdminDeleteInformation
         $this->db = $database->getConnection();
     }
 
-    public function deleteInformation()
+    public function deleteInformation($informationId)
     {
-        $input = file_get_contents("php://input");
-        $data = json_decode($input, true);
-
-        $informationId = $data['informationId'] ?? null;
-
-        if (!$informationId) 
-        {
+        if (empty($informationId)) {
             return ["success" => false, "message" => "Information ID missing"];
         }
 
-        try 
-        {
+        try {
             $request = "DELETE FROM about_me WHERE id = ?";
             $pdo = $this->db->prepare($request);
             $pdo->execute([$informationId]);
 
-            if ($pdo->rowCount() > 0) 
-            {
+            if ($pdo->rowCount() > 0) {
                 return ["success" => true, "message" => "Information deleted successfully"];
-            } 
-            else 
-            {
+            } else {
                 return ["success" => false, "message" => "Information not found"];
             }
-        } 
-        catch (\PDOException $e) 
-        {
+        } catch (\PDOException $e) {
             error_log("Error when deleting information: " . $e->getMessage());
             return ["success" => false, "message" => "Database error"];
         }
