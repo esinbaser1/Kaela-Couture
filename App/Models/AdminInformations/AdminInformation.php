@@ -16,14 +16,17 @@ class AdminInformation
 
     public function getInformations()
     {
-        try {
+        try 
+        {
             $request = "SELECT * FROM about_me";
             $pdo = $this->db->query($request);
-            $information = $pdo->fetchAll();
+            $information = $pdo->fetchAll(\PDO::FETCH_ASSOC);
 
             return ["success" => true, "information" => $information, "message" => "Information retrieved successfully!"];
 
-        } catch (\PDOException $e) {
+        } 
+        catch (\PDOException $e) 
+        {
             error_log("Error when retrieving information: " . $e->getMessage());
             
             return ["success" => false, "message" => "Database error"];

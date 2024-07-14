@@ -19,7 +19,7 @@ class AdminDeleteProduct
         $input = file_get_contents("php://input");
         $data = json_decode($input, true);
 
-        $productId = $data['productId'] ?? null;
+        $productId = isset($data['productId']) ? strip_tags($data['productId']) : null;
 
         if (!$productId) 
         {

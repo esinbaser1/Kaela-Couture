@@ -1,5 +1,4 @@
 <?php
-
 namespace AdminInformations;
 
 use App\Database;
@@ -14,12 +13,15 @@ class AdminDeleteInformation
         $this->db = $database->getConnection();
     }
 
-    public function deleteInformation($informationId)
+    public function deleteInformation()
     {
-        // Vérification de l'ID de l'information
-        $informationId = strip_tags($informationId);
+        $input = file_get_contents("php://input");
+        $data = json_decode($input, true);
 
-        if (empty($informationId)) {
+        $informationId = isset($data['informationId']) ? strip_tags($data['informationId']) : null;
+
+        if (empty($informationId)) 
+        {
             return ["success" => false, "message" => "Information ID missing"];
         }
 
@@ -28,14 +30,20 @@ class AdminDeleteInformation
             $pdo = $this->db->prepare($request);
             $pdo->execute([$informationId]);
 
-            if ($pdo->rowCount() > 0) {
+            if ($pdo->rowCount() > 0) 
+            {
                 return ["success" => true, "message" => "Information deleted successfully"];
-            } else {
+            } 
+            else 
+            {
                 return ["success" => false, "message" => "Information not found"];
             }
-        } catch (\PDOException $e) {
+        }
+         catch (\PDOException $e) 
+        {
             error_log("Error when deleting information: " . $e->getMessage());
             return ["success" => false, "message" => "Database error"];
         }
     }
 }
+

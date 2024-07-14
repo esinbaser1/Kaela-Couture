@@ -88,9 +88,8 @@ switch ($action) {
                 break;
 
             case "getInformationById":
-                $informationId = $_GET['informationId'] ?? null;
                 $getInformationById = new AdminUpdateInformation();
-                $response = $getInformationById->getInformationById($informationId);
+                $response = $getInformationById->getInformationById();
                 break;
 
             case "updateInformation":
@@ -99,9 +98,8 @@ switch ($action) {
                 break;
 
             case "deleteInformation":
-                $informationId = $_GET['informationId'] ?? null;
                 $adminDeleteInformation = new AdminDeleteInformation();
-                $response = $adminDeleteInformation->deleteInformation($informationId);
+                $response = $adminDeleteInformation->deleteInformation();
                 break;
 
             default:

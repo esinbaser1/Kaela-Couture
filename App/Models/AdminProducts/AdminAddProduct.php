@@ -20,10 +20,10 @@ class AdminAddProduct
 
     public function addProduct()
     {
-        $productName = $_POST['productName'] ?? '';
-        $productDescription = $_POST['productDescription'] ?? '';
-        $productCategory = $_POST['productCategory'] ?? '';
-        $productImage = $_FILES['productImage'] ?? null;
+        $productName = isset($_POST['productName']) ? strip_tags($_POST['productName']) : null;
+        $productDescription = isset($_POST['productDescription']) ? strip_tags($_POST['productDescription']) : null;
+        $productCategory = isset($_POST['productCategory']) ? strip_tags($_POST['productCategory']) : null;
+        $productImage = isset($_FILES['productImage']) ? $_FILES['productImage'] : null;
 
         if (empty($productName) || empty($productDescription) || empty($productCategory) || empty($productImage)) 
         {

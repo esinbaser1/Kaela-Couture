@@ -23,16 +23,19 @@ class AdminAddInformation
         $mobile = isset($data['mobile']) ? strip_tags($data['mobile']) : null;
         $address = isset($data['address']) ? strip_tags($data['address']) : null;
 
-        if (!preg_match('/^\+?[0-9]*$/', $mobile)) {
+        if (!preg_match('/^\+?[0-9]*$/', $mobile)) 
+        {
             return ["success" => false, "message" => "Invalid mobile number format"];
         }
 
-        try {
+        try 
+        {
             $request = "INSERT INTO about_me (description, mobile, address) VALUES (?, ?, ?)";
             $pdo = $this->db->prepare($request);
             $pdo->execute([$description, $mobile, $address]);
 
             $id = $this->db->lastInsertId();
+            
             $newInformation = [
                 'id' => $id,
                 'description' => $description,
@@ -41,7 +44,10 @@ class AdminAddInformation
             ];
 
             return ["success" => true, "message" => "Information added successfully!!!", "information" => $newInformation];
-        } catch (\PDOException $e) {
+
+        } 
+        catch (\PDOException $e) 
+        {
             error_log("Error when creating information: " . $e->getMessage());
             return ["success" => false, "message" => "Database error"];
         }

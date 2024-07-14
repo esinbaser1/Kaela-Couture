@@ -21,7 +21,7 @@ class AdminProduct
         {
             $request = "SELECT image.*, categorie.name AS categorie FROM image JOIN categorie ON image.categorie_id = categorie.id";
             $pdo = $this->db->query($request);
-            $product = $pdo->fetchAll();
+            $product = $pdo->fetchAll(\PDO::FETCH_ASSOC);
             
             return [ "success" => true, "product" => $product];
         }

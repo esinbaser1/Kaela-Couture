@@ -26,7 +26,7 @@ class AdminUpdateProduct
 
     public function getProductById()
     {
-        $productId = $_GET['productId'] ?? null;
+        $productId = isset($_GET['productId']) ? strip_tags($_GET['productId']) : null;
 
         if (!$productId) {
             return ["success" => false, "message" => "Product ID missing"];
@@ -53,7 +53,7 @@ class AdminUpdateProduct
 
     public function updateProduct()
     {
-        $productId = $_POST['productId'] ?? null;
+        $productId = isset($_POST['productId']) ? strip_tags($_POST['productId']) : null;
 
         if ($productId) 
         {
