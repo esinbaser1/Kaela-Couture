@@ -5,14 +5,18 @@ require_once('vendor/autoload.php');
 use Models\Signup;
 use Models\Login;
 use Models\Contact;
-use Models\AdminAddProduct;
-use Models\AdminUpdateProduct;
-use Models\AdminProduct;
-use Models\AdminDeleteProduct;
-use Models\AdminInformation;
-use Models\AdminAddInformation;
-use Models\AdminUpdateInformation;
-use Models\AdminDeleteInformation;
+
+//Admin Products
+use AdminProducts\AdminAddProduct;
+use AdminProducts\AdminUpdateProduct;
+use AdminProducts\AdminProduct;
+use AdminProducts\AdminDeleteProduct;
+
+//Admin Informations
+use AdminInformations\AdminInformation;
+use AdminInformations\AdminAddInformation;
+use AdminInformations\AdminUpdateInformation;
+use AdminInformations\AdminDeleteInformation;
 
 $action = $_REQUEST['action'] ?? null;
 
