@@ -8,7 +8,10 @@
             "Models\\": "App/Models/",
             "Lib\\": "lib/",
             "Traits\\": "App/Models/Traits/",
-            "Components\\": "App/Components/"
+            "Components\\": "App/Components/",
+            "AdminInformations\\": "App/Models/AdminInformations/",
+            "AdminProducts\\": "App/Models/AdminProducts/"
+
         }
     },
     "authors": [

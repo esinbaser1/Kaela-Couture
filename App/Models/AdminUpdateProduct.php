@@ -1,12 +1,12 @@
 <?php
-// Models/AdminModifyProduct.php
+
 namespace Models;
 
 use App\Database;
 use Lib\Slug;
 use Components\ConvertToWebP;
 
-class AdminModifyProduct
+class AdminUpdateProduct
 {
     protected $db;
     protected $slug;
@@ -118,7 +118,7 @@ class AdminModifyProduct
                 $pdo = $this->db->prepare($request);
                 $pdo->execute([$productName, $productDescription, $imagePath, $productSlug, $productCategory, $productId]);
 
-                // Récupérer les informations mises à jour du produit pour les retourner dans la réponse
+    
                 $request = "SELECT * FROM image WHERE id = ?";
                 $pdo = $this->db->prepare($request);
                 $pdo->execute([$productId]);

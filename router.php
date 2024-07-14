@@ -6,12 +6,12 @@ use Models\Signup;
 use Models\Login;
 use Models\Contact;
 use Models\AdminAddProduct;
-use Models\AdminModifyProduct;
+use Models\AdminUpdateProduct;
 use Models\AdminProduct;
 use Models\AdminDeleteProduct;
 use Models\AdminInformation;
 use Models\AdminAddInformation;
-use Models\AdminInformationModify;
+use Models\AdminUpdateInformation;
 use Models\AdminDeleteInformation;
 
 $action = $_REQUEST['action'] ?? null;
@@ -38,10 +38,22 @@ switch ($action) {
         $adminAction = $_REQUEST['adminAction'] ?? null;
 
         switch ($adminAction) {
-            
-            case "productDisplay":
-                $productDisplay = new AdminProduct();
-                $response = $productDisplay->getProductAndCategorie();
+
+                //PRODUCTS
+
+            case "getProduct":
+                $getProduct = new AdminProduct();
+                $response = $getProduct->getProductAndCategorie();
+                break;
+
+            case "getProductById":
+                $getProductById = new AdminUpdateProduct();
+                $response = $getProductById->getProductById();
+                break;
+
+            case "getProductCategory":
+                $adminAddProduct = new AdminAddProduct();
+                $response = $adminAddProduct->getCategorie();
                 break;
 
             case "addProduct":
@@ -49,18 +61,8 @@ switch ($action) {
                 $response = $adminAddProduct->addProduct();
                 break;
 
-            case "getCategorie":
-                $adminAddProduct = new AdminAddProduct();
-                $response = $adminAddProduct->getCategorie();
-                break;
-
-            case "getProduct":
-                $getProduct = new AdminModifyProduct();
-                $response = $getProduct->getProductById();
-                break;
-
             case "updateProduct":
-                $adminUpdateProduct = new AdminModifyProduct();
+                $adminUpdateProduct = new AdminUpdateProduct();
                 $response = $adminUpdateProduct->updateProduct();
                 break;
 
@@ -69,41 +71,33 @@ switch ($action) {
                 $response = $adminDeleteProduct->deleteProduct();
                 break;
 
-            case "adminInformation":
-                $adminInformation = new AdminInformation();
-                $response = $adminInformation->getInformations();
-                break;
-
-            case "adminAddInformation":
-                $adminAddInformation = new AdminAddInformation();
-                $response = $adminAddInformation->addInformation();
-                break;
+                //INFORMATIONS
 
             case "getInformation":
-                $informationId = $_REQUEST['informationId'] ?? null;
-                if ($informationId) {
-                    $getInformation = new AdminInformationModify();
-                    $response = $getInformation->getInformationById($informationId);
-                } else {
-                    $response = ["success" => false, "message" => "Information ID missing"];
-                }
+                $getInformation = new AdminInformation();
+                $response = $getInformation->getInformations();
+                break;
+
+            case "addInformation":
+                $addInformation = new AdminAddInformation();
+                $response = $addInformation->addInformation();
+                break;
+
+            case "getInformationById":
+                $informationId = $_GET['informationId'] ?? null;
+                $getInformationById = new AdminUpdateInformation();
+                $response = $getInformationById->getInformationById($informationId);
                 break;
 
             case "updateInformation":
-                $adminUpdateInformation = new AdminInformationModify();
+                $adminUpdateInformation = new AdminUpdateInformation();
                 $response = $adminUpdateInformation->updateInformation();
                 break;
 
             case "deleteInformation":
-                $input = file_get_contents("php://input");
-                $data = json_decode($input, true);
-                $informationId = $data['informationId'] ?? null;
-                if ($informationId) {
-                    $adminDeleteInformation = new AdminDeleteInformation();
-                    $response = $adminDeleteInformation->deleteInformation($informationId);
-                } else {
-                    $response = ["success" => false, "message" => "Information ID missing"];
-                }
+                $informationId = $_GET['informationId'] ?? null;
+                $adminDeleteInformation = new AdminDeleteInformation();
+                $response = $adminDeleteInformation->deleteInformation($informationId);
                 break;
 
             default:

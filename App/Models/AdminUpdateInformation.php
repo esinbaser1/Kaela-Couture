@@ -4,7 +4,7 @@ namespace Models;
 
 use App\Database;
 
-class AdminInformationModify
+class AdminUpdateInformation
 {
     protected $db;
 

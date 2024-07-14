@@ -16,6 +16,9 @@ class AdminDeleteInformation
 
     public function deleteInformation($informationId)
     {
+        // Vérification de l'ID de l'information
+        $informationId = strip_tags($informationId);
+
         if (empty($informationId)) {
             return ["success" => false, "message" => "Information ID missing"];
         }

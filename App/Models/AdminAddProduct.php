@@ -1,6 +1,5 @@
 <?php
 
-// Models/AdminAddProduct.php
 namespace Models;
 
 use App\Database;

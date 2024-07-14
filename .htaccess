@@ -11,35 +11,40 @@ RewriteRule ^login$ index.php?action=login [L,QSA]
 # URL rewriting for contact
 RewriteRule ^contact$ index.php?action=contact [L,QSA]
 
-# URL rewriting for productDisplay (admin)
-RewriteRule ^productDisplay$ index.php?adminAction=productDisplay [L,QSA]
+# ADMIN - PRODUCTS -------------------------------------------------------
 
-# URL rewriting for adminAddProduct (admin)
+# URL rewriting for get products (admin)
+RewriteRule ^getProduct$ index.php?adminAction=getProduct [L,QSA]
+
+# URL rewriting for add products (admin)
 RewriteRule ^addProduct$ index.php?adminAction=addProduct [L,QSA]
 
-# URL rewriting for getCategorie (admin)
-RewriteRule ^getCategorie$ index.php?adminAction=getCategorie [L,QSA]
+# URL rewriting for get product categories (admin)
+RewriteRule ^getProductCategory$ index.php?adminAction=getProductCategory [L,QSA]
 
-# URL rewriting for getProduct (admin)
-RewriteRule ^getProduct/([0-9]+)$ index.php?adminAction=getProduct&productId=$1 [L,QSA]
+# URL rewriting for get products by id (admin)
+RewriteRule ^getProductById/([0-9]+)$ index.php?adminAction=getProductById&productId=$1 [L,QSA]
 
-# URL rewriting for updateProduct (admin)
+# URL rewriting for update products (admin)
 RewriteRule ^updateProduct$ index.php?adminAction=updateProduct [L,QSA]
 
-# URL rewriting for deleteProduct (admin)
+# URL rewriting for delete products (admin)
 RewriteRule ^deleteProduct$ index.php?adminAction=deleteProduct [L,QSA]
 
-# URL rewriting for adminInformation (admin)
-RewriteRule ^adminInformation$ index.php?adminAction=adminInformation [L,QSA]
 
-# URL rewriting for adminAddInformation (admin)
-RewriteRule ^adminAddInformation$ index.php?adminAction=adminAddInformation [L,QSA]
+# ADMIN - INFORMATIONS -------------------------------------------------------
 
-# URL rewriting for getInformation (admin)
-RewriteRule ^getInformation/([0-9]+)$ index.php?adminAction=getInformation&informationId=$1 [L,QSA]
+# URL rewriting for get informations (admin)
+RewriteRule ^getInformation$ index.php?adminAction=getInformation [L,QSA]
 
-# URL rewriting for updateInformation (admin)
+# URL rewriting for add informations (admin)
+RewriteRule ^addInformation$ index.php?adminAction=addInformation [L,QSA]
+
+# URL rewriting for get informations by id (admin)
+RewriteRule ^getInformationById/([0-9]+)$ index.php?adminAction=getInformationById&informationId=$1 [L,QSA]
+
+# URL rewriting for update informations (admin)
 RewriteRule ^updateInformation$ index.php?adminAction=updateInformation [L,QSA]
 
-# URL rewriting for deleteInformation (admin)
+# URL rewriting for delete informations (admin)
 RewriteRule ^deleteInformation$ index.php?adminAction=deleteInformation [L,QSA]

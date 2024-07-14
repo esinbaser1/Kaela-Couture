@@ -25,4 +25,6 @@ return array(
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/src'),
     'Components\\' => array($baseDir . '/App/Components'),
     'App\\' => array($baseDir . '/App'),
+    'AdminProducts\\' => array($baseDir . '/App/Models/AdminProducts'),
+    'AdminInformations\\' => array($baseDir . '/App/Models/AdminInformations'),
 );
