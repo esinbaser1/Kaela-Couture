@@ -38,6 +38,7 @@ switch ($action) {
         $adminAction = $_REQUEST['adminAction'] ?? null;
 
         switch ($adminAction) {
+            
             case "productDisplay":
                 $productDisplay = new AdminProduct();
                 $response = $productDisplay->getProductAndCategorie();

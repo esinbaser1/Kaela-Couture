@@ -19,11 +19,12 @@ class AdminProduct
     {
         try 
         {
+            // $request = "SELECT * from image";
             $request = "SELECT image.*, categorie.name AS categorie FROM image JOIN categorie ON image.categorie_id = categorie.id";
             $pdo = $this->db->query($request);
-            $products = $pdo->fetchAll();
+            $product = $pdo->fetchAll();
             
-            return [ "success" => true, "products" => $products];
+            return [ "success" => true, "product" => $product];
         }
         catch(\PDOException $e)
         {

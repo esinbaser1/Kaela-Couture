@@ -32,7 +32,15 @@ class AdminAddInformation
             $pdo = $this->db->prepare($request);
             $pdo->execute([$description, $mobile, $address]);
 
-            return ["success" => true, "message" => "Information added successfully!!!", "information" => $pdo->fetch()];
+            $id = $this->db->lastInsertId();
+            $newInformation = [
+                'id' => $id,
+                'description' => $description,
+                'mobile' => $mobile,
+                'address' => $address
+            ];
+
+            return ["success" => true, "message" => "Information added successfully!!!", "information" => $newInformation];
         } catch (\PDOException $e) {
             error_log("Error when creating information: " . $e->getMessage());
             return ["success" => false, "message" => "Database error"];

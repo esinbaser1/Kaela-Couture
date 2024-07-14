@@ -1,5 +1,5 @@
 <?php
-
+// Models/AdminModifyProduct.php
 namespace Models;
 
 use App\Database;
@@ -8,7 +8,6 @@ use Components\ConvertToWebP;
 
 class AdminModifyProduct
 {
-
     protected $db;
     protected $slug;
 
@@ -37,10 +36,10 @@ class AdminModifyProduct
             $request = "SELECT * FROM image WHERE id = ?";
             $pdo = $this->db->prepare($request);
             $pdo->execute([$productId]);
-            $product = $pdo->fetch();
+            $productById = $pdo->fetch();
 
-            if ($product) {
-                return ["success" => true, "product" => $product];
+            if ($productById) {
+                return ["success" => true, "product" => $productById];
             } else {
                 return ["success" => false, "message" => "Product not found"];
             }
@@ -118,8 +117,14 @@ class AdminModifyProduct
                 
                 $pdo = $this->db->prepare($request);
                 $pdo->execute([$productName, $productDescription, $imagePath, $productSlug, $productCategory, $productId]);
+
+                // Récupérer les informations mises à jour du produit pour les retourner dans la réponse
+                $request = "SELECT * FROM image WHERE id = ?";
+                $pdo = $this->db->prepare($request);
+                $pdo->execute([$productId]);
+                $updatedProduct = $pdo->fetch();
     
-                return ["success" => true, "message" => "Product updated successfully"];
+                return ["success" => true, "message" => "Product updated successfully", "product" => $updatedProduct];
                 
             } 
             catch (\PDOException $e) 

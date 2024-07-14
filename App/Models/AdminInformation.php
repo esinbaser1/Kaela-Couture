@@ -21,9 +21,11 @@ class AdminInformation
             $pdo = $this->db->query($request);
             $information = $pdo->fetchAll();
 
-            return ["success" => true, "information" => $information];
+            return ["success" => true, "information" => $information, "message" => "Information retrieved successfully!"];
+
         } catch (\PDOException $e) {
             error_log("Error when retrieving information: " . $e->getMessage());
+            
             return ["success" => false, "message" => "Database error"];
         }
     }

@@ -1,5 +1,6 @@
 <?php
 
+// Models/AdminAddProduct.php
 namespace Models;
 
 use App\Database;
@@ -81,9 +82,9 @@ class AdminAddProduct
         try {
             $request = "SELECT id, name FROM categorie";
             $pdo = $this->db->query($request);
-            $categories = $pdo->fetchAll();
+            $categorie = $pdo->fetchAll();
 
-            return ["success" => true, "categories" => $categories];
+            return ["success" => true, "categorie" => $categorie];
         } 
         catch (\PDOException $e) 
         {
