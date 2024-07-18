@@ -12,6 +12,10 @@ use AdminProducts\AdminUpdateProduct;
 use AdminProducts\AdminProduct;
 use AdminProducts\AdminDeleteProduct;
 
+//Admin Categories
+
+use AdminCategories\AdminCategory;
+
 //Admin Informations
 use AdminInformations\AdminInformation;
 use AdminInformations\AdminAddInformation;
@@ -55,11 +59,6 @@ switch ($action) {
                 $response = $getProductById->getProductById();
                 break;
 
-            case "getProductCategory":
-                $adminAddProduct = new AdminAddProduct();
-                $response = $adminAddProduct->getCategorie();
-                break;
-
             case "addProduct":
                 $adminAddProduct = new AdminAddProduct();
                 $response = $adminAddProduct->addProduct();
@@ -74,6 +73,14 @@ switch ($action) {
                 $adminDeleteProduct = new AdminDeleteProduct();
                 $response = $adminDeleteProduct->deleteProduct();
                 break;
+
+                // CATEGORIES
+
+            case "getProductCategory":
+                $productCategory = new AdminCategory();
+                $response = $productCategory->getCategorie();
+                break;
+
 
                 //INFORMATIONS
 

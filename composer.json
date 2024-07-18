@@ -10,7 +10,10 @@
             "Traits\\": "App/Models/Traits/",
             "Components\\": "App/Components/",
             "AdminInformations\\": "App/Models/AdminInformations/",
-            "AdminProducts\\": "App/Models/AdminProducts/"
+            "AdminProducts\\": "App/Models/AdminProducts/",
+            "AdminCategories\\": "App/Models/AdminCategories/"
+            
+
 
         }
     },

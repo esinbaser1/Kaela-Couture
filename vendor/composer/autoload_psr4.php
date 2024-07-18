@@ -27,4 +27,5 @@ return array(
     'App\\' => array($baseDir . '/App'),
     'AdminProducts\\' => array($baseDir . '/App/Models/AdminProducts'),
     'AdminInformations\\' => array($baseDir . '/App/Models/AdminInformations'),
+    'AdminCategories\\' => array($baseDir . '/App/Models/AdminCategories'),
 );

@@ -76,19 +76,19 @@ class AdminAddProduct
         }
     }
 
-    public function getCategorie()
-    {
-        try {
-            $request = "SELECT id, name FROM categorie";
-            $pdo = $this->db->query($request);
-            $categorie = $pdo->fetchAll();
+    // public function getCategorie()
+    // {
+    //     try {
+    //         $request = "SELECT * FROM categorie";
+    //         $pdo = $this->db->query($request);
+    //         $categorie = $pdo->fetchAll();
 
-            return ["success" => true, "categorie" => $categorie];
-        } 
-        catch (\PDOException $e) 
-        {
-            error_log("Error when retrieving categories: " . $e->getMessage());
-            return ["success" => false, "message" => "Database error"];
-        }
-    }
+    //         return ["success" => true, "categorie" => $categorie];
+    //     } 
+    //     catch (\PDOException $e) 
+    //     {
+    //         error_log("Error when retrieving categories: " . $e->getMessage());
+    //         return ["success" => false, "message" => "Database error"];
+    //     }
+    // }
 }

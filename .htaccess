@@ -19,9 +19,6 @@ RewriteRule ^getProduct$ index.php?adminAction=getProduct [L,QSA]
 # URL rewriting for add products (admin)
 RewriteRule ^addProduct$ index.php?adminAction=addProduct [L,QSA]
 
-# URL rewriting for get product categories (admin)
-RewriteRule ^getProductCategory$ index.php?adminAction=getProductCategory [L,QSA]
-
 # URL rewriting for get products by id (admin)
 RewriteRule ^getProductById/([0-9]+)$ index.php?adminAction=getProductById&productId=$1 [L,QSA]
 
@@ -31,6 +28,11 @@ RewriteRule ^updateProduct$ index.php?adminAction=updateProduct [L,QSA]
 # URL rewriting for delete products (admin)
 RewriteRule ^deleteProduct$ index.php?adminAction=deleteProduct [L,QSA]
 
+
+# ADMIN - CATEGORIES -------------------------------------------------------
+
+# URL rewriting for get product categories (admin)
+RewriteRule ^getProductCategory$ index.php?adminAction=getProductCategory [L,QSA]
 
 # ADMIN - INFORMATIONS -------------------------------------------------------
 
