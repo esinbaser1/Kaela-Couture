@@ -19,9 +19,9 @@ class AdminCategory
         try {
             $request = "SELECT * FROM categorie";
             $pdo = $this->db->query($request);
-            $categorie = $pdo->fetchAll();
+            $category = $pdo->fetchAll();
 
-            return ["success" => true, "categorie" => $categorie];
+            return ["success" => true, "category" => $category];
         } 
         catch (\PDOException $e) 
         {

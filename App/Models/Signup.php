@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 namespace Models;
 
 use App\Database;
+/* ********* Class Login Signup user signup functionality ********* */
 
 class Signup 
 {
@@ -16,7 +17,11 @@ class Signup
 
     public function createUser()
     {
-
+        // if($_SERVER['REQUEST_METHOD'] !== 'POST')
+        // {
+        //     return ["success" => false, "message" => "Method not allowed"];
+        // }
+        
         $input = file_get_contents("php://input");
         $data = json_decode($input, true);
 
@@ -24,27 +29,33 @@ class Signup
         $email = $data['email'] ?? null;
         $password = $data['password'] ?? null;
 
-        if (!$username || !$email || !$password) {
+        if(!$username || !$email || !$password) 
+        {
             return ["success" => false, "message" => "All fields are required"];
         }
 
         if ($this->emailExists($email)) {
-            return ["success" => false, "message" => "This email is already used"];
+            echo json_encode(["success" => false, "message" => "This email is already used"]);
+            exit();
         }
 
         if ($this->usernameExists($username)) {
-            return ["success" => false, "message" => "This username is already used"];
+            echo json_encode(["success" => false, "message" => "This username is already used"]);
+            exit();
         }
 
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
-        try {
+        try 
+        {
             $request = "INSERT INTO user (username, email, password) VALUES (?,?,?)";
             $pdo = $this->db->prepare($request);
             $pdo->execute([$username, $email, $passwordHash]);
 
             return ["success" => true, "message" => "User created successfully"];
-        } catch (\PDOException $e) {
+        } 
+        catch (\PDOException $e) 
+        {
             error_log("Error when creating user: " . $e->getMessage());
             return ["success" => false, "message" => "An error has occurred while processing your request"];
         }
@@ -55,7 +66,6 @@ class Signup
         $pdo->execute([$email]);
         return $pdo->fetchColumn() > 0;
     }
-
     private function usernameExists($username) {
         $pdo = $this->db->prepare("SELECT COUNT(*) FROM user WHERE username = ?");
         $pdo->execute([$username]);

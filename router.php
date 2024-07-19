@@ -13,8 +13,8 @@ use AdminProducts\AdminProduct;
 use AdminProducts\AdminDeleteProduct;
 
 //Admin Categories
-
 use AdminCategories\AdminCategory;
+use AdminCategories\AdminCategoryById;
 
 //Admin Informations
 use AdminInformations\AdminInformation;
@@ -81,6 +81,10 @@ switch ($action) {
                 $response = $productCategory->getCategorie();
                 break;
 
+            case "getCategoryById":
+                $productCategoryById = new AdminCategoryById();
+                $response = $productCategoryById->getCategoryById();
+                break;
 
                 //INFORMATIONS
 

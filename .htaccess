@@ -34,6 +34,9 @@ RewriteRule ^deleteProduct$ index.php?adminAction=deleteProduct [L,QSA]
 # URL rewriting for get product categories (admin)
 RewriteRule ^getProductCategory$ index.php?adminAction=getProductCategory [L,QSA]
 
+# URL rewriting for get categories by id (admin)
+# RewriteRule ^getCategoryById/([0-9]+)$ index.php?adminAction=getCategoryById&categoryId=$1 [L,QSA]
+
 # ADMIN - INFORMATIONS -------------------------------------------------------
 
 # URL rewriting for get informations (admin)
