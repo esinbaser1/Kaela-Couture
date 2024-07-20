@@ -2,6 +2,7 @@
 
 require_once('vendor/autoload.php');
 
+
 use Models\Signup;
 use Models\Login;
 use Models\Contact;
@@ -15,6 +16,8 @@ use AdminProducts\AdminDeleteProduct;
 //Admin Categories
 use AdminCategories\AdminCategory;
 use AdminCategories\AdminCategoryById;
+use AdminCategories\AdminAddCategory;
+
 
 //Admin Informations
 use AdminInformations\AdminInformation;
@@ -84,6 +87,11 @@ switch ($action) {
             case "getCategoryById":
                 $productCategoryById = new AdminCategoryById();
                 $response = $productCategoryById->getCategoryById();
+                break;
+
+            case "addCategory":
+                $addCategory = new AdminAddCategory();
+                $response = $addCategory->addCategory();
                 break;
 
                 //INFORMATIONS

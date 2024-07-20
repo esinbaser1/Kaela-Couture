@@ -67,7 +67,16 @@ class AdminAddProduct
             $pdo = $this->db->prepare($request);
             $pdo->execute([$newWebpFileName, $productId]);
 
-            return ["success" => true, "message" => "Product added successfully"];
+            $newProduct = [
+                'id' => $productId,
+                'name' => $productName,
+                'description' => $productDescription,
+                'path' => $newWebpFileName,
+                'slug' => $productSlug,
+                'category_id' => $productCategory
+            ];
+
+            return ["success" => true, "message" => "Product added successfully", "product" => $newProduct];
         } 
         catch (\PDOException $e) 
         {
@@ -75,20 +84,4 @@ class AdminAddProduct
             return ["success" => false, "message" => "Database error"];
         }
     }
-
-    // public function getCategorie()
-    // {
-    //     try {
-    //         $request = "SELECT * FROM categorie";
-    //         $pdo = $this->db->query($request);
-    //         $categorie = $pdo->fetchAll();
-
-    //         return ["success" => true, "categorie" => $categorie];
-    //     } 
-    //     catch (\PDOException $e) 
-    //     {
-    //         error_log("Error when retrieving categories: " . $e->getMessage());
-    //         return ["success" => false, "message" => "Database error"];
-    //     }
-    // }
 }

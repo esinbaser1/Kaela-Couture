@@ -22,7 +22,7 @@ class AdminInformation
             $pdo = $this->db->query($request);
             $information = $pdo->fetchAll(\PDO::FETCH_ASSOC);
 
-            return ["success" => true, "information" => $information, "message" => "Information retrieved successfully!"];
+            return ["success" => true, "information" => $information];
 
         } 
         catch (\PDOException $e) 
