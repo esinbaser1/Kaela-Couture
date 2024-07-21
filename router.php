@@ -18,6 +18,7 @@ use AdminCategories\AdminCategory;
 use AdminCategories\AdminCategoryById;
 use AdminCategories\AdminAddCategory;
 use AdminCategories\AdminUpdateCategory;
+use AdminCategories\AdminDeleteCategory;
 
 
 //Admin Informations
@@ -99,6 +100,11 @@ switch ($action) {
                 $updateCategory = new AdminUpdateCategory();
                 $response = $updateCategory->updateCategory();
                 break;
+
+                case "deleteCategory":
+                    $deleteCategory = new AdminDeleteCategory();
+                    $response = $deleteCategory->deleteCategory();
+                    break;
 
                 //INFORMATIONS
 

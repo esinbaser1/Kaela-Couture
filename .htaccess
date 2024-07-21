@@ -43,6 +43,9 @@ RewriteRule ^addCategory$ index.php?adminAction=addCategory [L,QSA]
 # URL rewriting for get product categories (admin)
 RewriteRule ^updateCategory$ index.php?adminAction=updateCategory [L,QSA]
 
+# URL rewriting for get categories by id (admin)
+RewriteRule ^deleteCategory$ index.php?adminAction=deleteCategory [L,QSA]
+
 # ADMIN - INFORMATIONS -------------------------------------------------------
 
 # URL rewriting for get informations (admin)

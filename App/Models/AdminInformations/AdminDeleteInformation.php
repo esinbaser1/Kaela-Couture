@@ -25,7 +25,8 @@ class AdminDeleteInformation
             return ["success" => false, "message" => "Information ID missing"];
         }
 
-        try {
+        try 
+        {
             $request = "DELETE FROM about_me WHERE id = ?";
             $pdo = $this->db->prepare($request);
             $pdo->execute([$informationId]);
