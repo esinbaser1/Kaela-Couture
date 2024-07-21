@@ -17,19 +17,19 @@ class AdminCategoryById
     public function getCategoryById()
     {
         $categoryId = isset($_GET['categoryId']) ? $_GET['categoryId'] : null;
-    
+
         if (empty($categoryId)) 
         {
             return ["success" => false, "message" => "Category ID missing"];
         }
-    
+
         try 
         {
             $request = "SELECT * FROM categorie WHERE id = ?";
             $pdo = $this->db->prepare($request);
             $pdo->execute([$categoryId]);
             $categoryById = $pdo->fetch(\PDO::FETCH_ASSOC);
-    
+
             if ($categoryById) 
             {
                 return ["success" => true, "categoryById" => $categoryById];

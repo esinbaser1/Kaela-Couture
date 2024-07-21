@@ -17,6 +17,7 @@ use AdminProducts\AdminDeleteProduct;
 use AdminCategories\AdminCategory;
 use AdminCategories\AdminCategoryById;
 use AdminCategories\AdminAddCategory;
+use AdminCategories\AdminUpdateCategory;
 
 
 //Admin Informations
@@ -92,6 +93,11 @@ switch ($action) {
             case "addCategory":
                 $addCategory = new AdminAddCategory();
                 $response = $addCategory->addCategory();
+                break;
+
+            case "updateCategory":
+                $updateCategory = new AdminUpdateCategory();
+                $response = $updateCategory->updateCategory();
                 break;
 
                 //INFORMATIONS

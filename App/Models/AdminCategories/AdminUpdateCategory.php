@@ -14,40 +14,63 @@ class AdminUpdateCategory
         $this->db = $database->getConnection();
     }
 
-
-public function updateCategory()
-{
-    $input = file_get_contents("php://input");
-    $data = json_decode($input, true);
-
-    $informationId = isset($data['id']) ? strip_tags($data['id']) : null;
-    $description = isset($data['description']) ? strip_tags($data['description']) : null;
-    $mobile = isset($data['mobile']) ? strip_tags($data['mobile']) : null;
-    $address = isset($data['address']) ? strip_tags($data['address']) : null;
-
-    if (empty($informationId) || empty($description) || empty($mobile) || empty($address)) 
+    public function updateCategory()
     {
-        error_log("Missing information for update");
-        return ["success" => false, "message" => "Missing information for update"];
+        $input = file_get_contents("php://input");
+        $data = json_decode($input, true);
+
+        $categoryId = isset($data['id']) ? strip_tags($data['id']) : null;
+        $categoryName = isset($data['name']) ? strip_tags($data['name']) : null;
+        $categoryDescription = isset($data['description']) ? strip_tags($data['description']) : null;
+        $categoryPageTitle = isset($data['page_title']) ? strip_tags($data['page_title']) : null;
+        $categoryPageDescription = isset($data['page_description']) ? strip_tags($data['page_description']) : null;
+
+        try 
+        {
+            // Récupérer les valeurs actuelles de la catégorie
+            $currentCategory = $this->getCategoryById($categoryId);
+
+            if (!$currentCategory) {
+                return ["success" => false, "message" => "Category not found"];
+            }
+
+            // Utiliser les valeurs actuelles si les nouvelles sont nulles
+            $categoryName = $categoryName ?? $currentCategory['name'];
+            $categoryDescription = $categoryDescription ?? $currentCategory['description'];
+            $categoryPageTitle = $categoryPageTitle ?? $currentCategory['page_title'];
+            $categoryPageDescription = $categoryPageDescription ?? $currentCategory['page_description'];
+
+            $request = "UPDATE categorie SET name = ?, description = ?, page_title = ?, page_description = ? WHERE id = ?";
+            $pdo = $this->db->prepare($request);
+            $pdo->execute([$categoryName, $categoryDescription, $categoryPageTitle, $categoryPageDescription, $categoryId]);
+
+            return ["success" => true, "message" => "Category updated successfully", "categoryUpdate" => [
+                'id' => $categoryId,
+                'name' => $categoryName,
+                'description' => $categoryDescription,
+                'page_title' => $categoryPageTitle,
+                'page_description' => $categoryPageDescription,
+            ]];
+        } catch (\PDOException $e) 
+        {
+            error_log("Error when updating category : " . $e->getMessage());
+            return ["success" => false, "message" => "Database error"];
+        }
     }
 
-    try 
+    private function getCategoryById($categoryId)
     {
-        $request = "UPDATE about_me SET description = ?, mobile = ?, address = ? WHERE id = ?";
-        $pdo = $this->db->prepare($request);
-        $pdo->execute([$description, $mobile, $address, $informationId]);
-
-        return ["success" => true, "message" => "Information updated successfully", "information" => [
-            'id' => $informationId,
-            'description' => $description,
-            'mobile' => $mobile,
-            'address' => $address,
-        ]];
-    } catch (\PDOException $e) 
-    {
-        error_log("Error when updating information: " . $e->getMessage());
-        return ["success" => false, "message" => "Database error"];
+        try 
+        {
+            $request = "SELECT * FROM categorie WHERE id = ?";
+            $pdo = $this->db->prepare($request);
+            $pdo->execute([$categoryId]);
+            return $pdo->fetch(\PDO::FETCH_ASSOC);
+        } 
+        catch (\PDOException $e) 
+        {
+            error_log("Error when fetching category: " . $e->getMessage());
+            return false;
+        }
     }
-}
-
 }
