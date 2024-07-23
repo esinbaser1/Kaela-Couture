@@ -1,5 +1,4 @@
 <?php
-
 namespace AdminCategories;
 
 use App\Database;
@@ -7,11 +6,13 @@ use App\Database;
 class AdminUpdateCategory
 {
     protected $db;
+    protected $adminCategoryById;
 
     public function __construct()
     {
         $database = new Database();
         $this->db = $database->getConnection();
+        $this->adminCategoryById = new AdminCategoryById();
     }
 
     public function updateCategory()
@@ -27,18 +28,23 @@ class AdminUpdateCategory
 
         try 
         {
-            // Récupérer les valeurs actuelles de la catégorie
-            $currentCategory = $this->getCategoryById($categoryId);
+            // Sauvegarder l'ID de la catégorie dans $_GET pour réutiliser la méthode existante
+            $_GET['categoryId'] = $categoryId;
 
-            if (!$currentCategory) {
+            // Récupérer les valeurs actuelles de la catégorie en utilisant la méthode existante
+            $currentCategory = $this->adminCategoryById->getCategoryById();
+
+            if (!$currentCategory['success']) {
                 return ["success" => false, "message" => "Category not found"];
             }
 
+            $currentCategoryData = $currentCategory['categoryById'];
+
             // Utiliser les valeurs actuelles si les nouvelles sont nulles
-            $categoryName = $categoryName ?? $currentCategory['name'];
-            $categoryDescription = $categoryDescription ?? $currentCategory['description'];
-            $categoryPageTitle = $categoryPageTitle ?? $currentCategory['page_title'];
-            $categoryPageDescription = $categoryPageDescription ?? $currentCategory['page_description'];
+            $categoryName = $categoryName ?? $currentCategoryData['name'];
+            $categoryDescription = $categoryDescription ?? $currentCategoryData['description'];
+            $categoryPageTitle = $categoryPageTitle ?? $currentCategoryData['page_title'];
+            $categoryPageDescription = $categoryPageDescription ?? $currentCategoryData['page_description'];
 
             $request = "UPDATE categorie SET name = ?, description = ?, page_title = ?, page_description = ? WHERE id = ?";
             $pdo = $this->db->prepare($request);
@@ -55,22 +61,6 @@ class AdminUpdateCategory
         {
             error_log("Error when updating category : " . $e->getMessage());
             return ["success" => false, "message" => "Database error"];
-        }
-    }
-
-    private function getCategoryById($categoryId)
-    {
-        try 
-        {
-            $request = "SELECT * FROM categorie WHERE id = ?";
-            $pdo = $this->db->prepare($request);
-            $pdo->execute([$categoryId]);
-            return $pdo->fetch(\PDO::FETCH_ASSOC);
-        } 
-        catch (\PDOException $e) 
-        {
-            error_log("Error when fetching category: " . $e->getMessage());
-            return false;
         }
     }
 }

@@ -16,10 +16,11 @@ class AdminCategory
 
     public function getCategorie()
     {
-        try {
+        try 
+        {
             $request = "SELECT * FROM categorie";
             $pdo = $this->db->query($request);
-            $category = $pdo->fetchAll();
+            $category = $pdo->fetchAll(\PDO::FETCH_ASSOC);
 
             return ["success" => true, "category" => $category];
         } 

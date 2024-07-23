@@ -23,11 +23,17 @@ class AdminAddProduct
         $productName = isset($_POST['productName']) ? strip_tags($_POST['productName']) : null;
         $productDescription = isset($_POST['productDescription']) ? strip_tags($_POST['productDescription']) : null;
         $productCategory = isset($_POST['productCategory']) ? strip_tags($_POST['productCategory']) : null;
+        $productSection = isset($_POST['productSection']) ? strip_tags($_POST['productSection']) : null;
         $productImage = isset($_FILES['productImage']) ? $_FILES['productImage'] : null;
 
-        if (empty($productName) || empty($productDescription) || empty($productCategory) || empty($productImage)) 
+        if (empty($productName) || empty($productDescription) || empty($productCategory) || empty($productImage) || empty($productSection)) 
         {
             return ["success" => false, "message" => "All fields are required"];
+        }
+
+        if ($this->nameExist($productName)) {
+           return ["success" => false, "message" => "This name is already used"];
+            exit();
         }
 
         $productSlug = $this->slug->sluguer($productName);
@@ -50,9 +56,9 @@ class AdminAddProduct
 
         try 
         {
-            $request = "INSERT INTO image (name, description, path, slug, categorie_id) VALUES (?,?,?,?,?)";
+            $request = "INSERT INTO product (name, description, path, slug, categorie_id, section_id) VALUES (?,?,?,?,?,?)";
             $pdo = $this->db->prepare($request);
-            $pdo->execute([$productName, $productDescription, $webpImagePath, $productSlug, $productCategory]);
+            $pdo->execute([$productName, $productDescription, $webpImagePath, $productSlug, $productCategory, $productSection]);
 
             $productId = $this->db->lastInsertId();
             $newWebpFileName =  $productSlug . '-' . $productId . '-' . $productCategory . '.webp';
@@ -63,7 +69,7 @@ class AdminAddProduct
                 return ["success" => false, "message" => "Failed to rename WebP image"];
             }
 
-            $request = "UPDATE image SET path = ? WHERE id = ?";
+            $request = "UPDATE product SET path = ? WHERE id = ?";
             $pdo = $this->db->prepare($request);
             $pdo->execute([$newWebpFileName, $productId]);
 
@@ -73,7 +79,8 @@ class AdminAddProduct
                 'description' => $productDescription,
                 'path' => $newWebpFileName,
                 'slug' => $productSlug,
-                'category_id' => $productCategory
+                'category_id' => $productCategory,
+                'section_id' => $productSection
             ];
 
             return ["success" => true, "message" => "Product added successfully", "product" => $newProduct];
@@ -83,5 +90,11 @@ class AdminAddProduct
             error_log("Error when creating product: " . $e->getMessage());
             return ["success" => false, "message" => "Database error"];
         }
+    }
+
+    private function nameExist($productName) {
+        $pdo = $this->db->prepare("SELECT COUNT(*) FROM product WHERE name = ?");
+        $pdo->execute([$productName]);
+        return $pdo->fetchColumn() > 0;
     }
 }

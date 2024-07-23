@@ -29,7 +29,7 @@ class AdminDeleteProduct
         try 
         {
             // Récupérer le chemin de l'image
-            $request = "SELECT path FROM image WHERE id = ?";
+            $request = "SELECT path FROM product WHERE id = ?";
             $pdo = $this->db->prepare($request);
             $pdo->execute([$productId]);
             $product = $pdo->fetch();
@@ -42,7 +42,7 @@ class AdminDeleteProduct
             $imagePath = 'assets/img/' . $product['path'];
 
             // Supprimer l'entrée de la base de données
-            $request = "DELETE FROM image WHERE id = ?";
+            $request = "DELETE FROM product WHERE id = ?";
             $pdo = $this->db->prepare($request);
             $pdo->execute([$productId]);
 

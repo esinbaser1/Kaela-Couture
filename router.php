@@ -15,11 +15,15 @@ use AdminProducts\AdminDeleteProduct;
 
 //Admin Categories
 use AdminCategories\AdminCategory;
-use AdminCategories\AdminCategoryById;
 use AdminCategories\AdminAddCategory;
+use AdminCategories\AdminCategoryById;
 use AdminCategories\AdminUpdateCategory;
 use AdminCategories\AdminDeleteCategory;
 
+
+//Admin Sections
+
+use AdminSections\AdminSection;
 
 //Admin Informations
 use AdminInformations\AdminInformation;
@@ -52,7 +56,7 @@ switch ($action) {
 
         switch ($adminAction) {
 
-                //PRODUCTS
+            // PRODUCTS
 
             case "getProduct":
                 $getProduct = new AdminProduct();
@@ -79,7 +83,7 @@ switch ($action) {
                 $response = $adminDeleteProduct->deleteProduct();
                 break;
 
-                // CATEGORIES
+            // CATEGORIES
 
             case "getProductCategory":
                 $productCategory = new AdminCategory();
@@ -101,12 +105,20 @@ switch ($action) {
                 $response = $updateCategory->updateCategory();
                 break;
 
-                case "deleteCategory":
-                    $deleteCategory = new AdminDeleteCategory();
-                    $response = $deleteCategory->deleteCategory();
-                    break;
+            case "deleteCategory":
+                $deleteCategory = new AdminDeleteCategory();
+                $response = $deleteCategory->deleteCategory();
+                break;
 
-                //INFORMATIONS
+            // SECTIONS
+
+            case "getSection":
+                $getSection = new AdminSection();
+                $response = $getSection->getSection();
+                break;
+
+
+            // INFORMATIONS
 
             case "getInformation":
                 $getInformation = new AdminInformation();

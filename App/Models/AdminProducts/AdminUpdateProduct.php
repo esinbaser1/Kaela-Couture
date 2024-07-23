@@ -33,7 +33,7 @@ class AdminUpdateProduct
         }
 
         try {
-            $request = "SELECT * FROM image WHERE id = ?";
+            $request = "SELECT * FROM product WHERE id = ?";
             $pdo = $this->db->prepare($request);
             $pdo->execute([$productId]);
             $productById = $pdo->fetch();
@@ -69,7 +69,7 @@ class AdminUpdateProduct
 
                 if ($productImage) 
                 {
-                    $request = "SELECT path FROM image WHERE id = ?";
+                    $request = "SELECT path FROM product WHERE id = ?";
                     $pdo = $this->db->prepare($request);
                     $pdo->execute([$productId]);
                     $existingProduct = $pdo->fetch();
@@ -106,20 +106,20 @@ class AdminUpdateProduct
                 } 
                 else 
                 {
-                    $request = "SELECT path FROM image WHERE id = ?";
+                    $request = "SELECT path FROM product WHERE id = ?";
                     $pdo = $this->db->prepare($request);
                     $pdo->execute([$productId]);
                     $existingProduct = $pdo->fetch();
                     $imagePath = $existingProduct['path'];
                 }
     
-                $request = "UPDATE image SET name = ?, description = ?, path = ?, slug = ?, categorie_id = ? WHERE id = ?";
+                $request = "UPDATE product SET name = ?, description = ?, path = ?, slug = ?, categorie_id = ? WHERE id = ?";
                 
                 $pdo = $this->db->prepare($request);
                 $pdo->execute([$productName, $productDescription, $imagePath, $productSlug, $productCategory, $productId]);
 
     
-                $request = "SELECT * FROM image WHERE id = ?";
+                $request = "SELECT * FROM product WHERE id = ?";
                 $pdo = $this->db->prepare($request);
                 $pdo->execute([$productId]);
                 $updatedProduct = $pdo->fetch();

@@ -1,13 +1,12 @@
 <?php
 
-namespace AdminProducts;
+namespace AdminSections;
 
 use App\Database;
 
-class AdminProduct
+class AdminSection 
 {
     protected $db;
-
 
     public function __construct()
     {
@@ -15,21 +14,21 @@ class AdminProduct
         $this->db = $database->getConnection();
     }
 
-    public function getProductAndCategorie()
+    public function getSection()
     {
-        try 
+        try
         {
-            $request = "SELECT product.*, categorie.name AS categorie, section.name AS section FROM product JOIN categorie ON product.categorie_id = categorie.id JOIN section ON product.section_id = section.id" ;
+            $request = "SELECT * FROM section";
             $pdo = $this->db->query($request);
-            $product = $pdo->fetchAll(\PDO::FETCH_ASSOC);
-            
-            return [ "success" => true, "product" => $product];
+            $section = $pdo->fetchAll(\PDO::FETCH_ASSOC);
+
+            return ["success" => true, "section" => $section];
         }
         catch(\PDOException $e)
         {
             error_log("Error when retrieving categories: " . $e->getMessage());
-
             return ["success" => false, "message" => "Database error"];
         }
     }
+
 }

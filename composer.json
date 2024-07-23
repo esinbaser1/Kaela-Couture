@@ -11,7 +11,8 @@
             "Components\\": "App/Components/",
             "AdminInformations\\": "App/Models/AdminInformations/",
             "AdminProducts\\": "App/Models/AdminProducts/",
-            "AdminCategories\\": "App/Models/AdminCategories/"
+            "AdminCategories\\": "App/Models/AdminCategories/",
+            "AdminSections\\": "App/Models/AdminSections/"
             
 
 
