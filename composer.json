@@ -12,7 +12,8 @@
             "AdminInformations\\": "App/Models/AdminInformations/",
             "AdminProducts\\": "App/Models/AdminProducts/",
             "AdminCategories\\": "App/Models/AdminCategories/",
-            "AdminSections\\": "App/Models/AdminSections/"
+            "AdminSections\\": "App/Models/AdminSections/",
+            "AdminSocialNetworks\\": "App/Models/AdminSocialNetworks/"
             
 
 

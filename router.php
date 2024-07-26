@@ -2,7 +2,6 @@
 
 require_once('vendor/autoload.php');
 
-
 use Models\Signup;
 use Models\Login;
 use Models\Contact;
@@ -20,7 +19,6 @@ use AdminCategories\AdminCategoryById;
 use AdminCategories\AdminUpdateCategory;
 use AdminCategories\AdminDeleteCategory;
 
-
 //Admin Sections
 
 use AdminSections\AdminSection;
@@ -30,6 +28,13 @@ use AdminInformations\AdminInformation;
 use AdminInformations\AdminAddInformation;
 use AdminInformations\AdminUpdateInformation;
 use AdminInformations\AdminDeleteInformation;
+
+//Admin Social Networks
+
+use AdminSocialNetworks\AdminSocialNetwork;
+use AdminSocialNetworks\AdminAddSocialNetwork;
+use AdminSocialNetworks\AdminUpdateSocialNetwork;
+use AdminSocialNetworks\AdminDeleteSocialNetwork;
 
 $action = $_REQUEST['action'] ?? null;
 
@@ -42,8 +47,8 @@ switch ($action) {
         break;
 
     case "login":
-        $signup = new Login();
-        $response = $signup->getUser();
+        $login = new Login();
+        $response = $login->getUser();
         break;
 
     case "contact":
@@ -117,7 +122,6 @@ switch ($action) {
                 $response = $getSection->getSection();
                 break;
 
-
             // INFORMATIONS
 
             case "getInformation":
@@ -143,6 +147,34 @@ switch ($action) {
             case "deleteInformation":
                 $adminDeleteInformation = new AdminDeleteInformation();
                 $response = $adminDeleteInformation->deleteInformation();
+                break;
+
+            // SOCIAL NETWORKS
+
+            case "getSocialNetwork":
+                $getSocialNetwork = new AdminSocialNetwork();
+                $response = $getSocialNetwork->getSocialNetwork();
+                break;
+
+            case "getSocialNetworkById":
+                // $socialNetworkId = $_GET['socialNetworkId'] ?? null;
+                $getSocialNetworkById = new AdminUpdateSocialNetwork();
+                $response = $getSocialNetworkById->getSocialNetworkById();
+                break;
+
+            case "addSocialNetwork":
+                $addSocialNetwork = new AdminAddSocialNetwork();
+                $response = $addSocialNetwork->addSocialNetwork();
+                break;
+
+            case "updateSocialNetwork":
+                $updateSocialNetwork = new AdminUpdateSocialNetwork();
+                $response = $updateSocialNetwork->updateSocialNetwork();
+                break;
+
+            case "deleteSocialNetwork":
+                $deleteSocialNetwork = new AdminDeleteSocialNetwork();
+                $response = $deleteSocialNetwork->deleteSocialNetwork();
                 break;
 
             default:

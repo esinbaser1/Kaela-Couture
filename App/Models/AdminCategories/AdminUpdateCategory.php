@@ -60,6 +60,7 @@ class AdminUpdateCategory
         } catch (\PDOException $e) 
         {
             error_log("Error when updating category : " . $e->getMessage());
+            
             return ["success" => false, "message" => "Database error"];
         }
     }

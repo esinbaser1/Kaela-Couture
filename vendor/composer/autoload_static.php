@@ -66,6 +66,7 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         'A' => 
         array (
             'App\\' => 4,
+            'AdminSocialNetworks\\' => 20,
             'AdminSections\\' => 14,
             'AdminProducts\\' => 14,
             'AdminInformations\\' => 18,
@@ -149,6 +150,10 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App',
+        ),
+        'AdminSocialNetworks\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models/AdminSocialNetworks',
         ),
         'AdminSections\\' => 
         array (

@@ -5,7 +5,8 @@ namespace App;
 class Database {
 
     protected $cnx;
-    protected $host = '127.0.0.1';
+    // protected $host = '127.0.0.1';
+    protected $host = 'localhost';
     protected $db = 'kaela_couture';
     protected $login = 'root';
     protected $pw = 'root';

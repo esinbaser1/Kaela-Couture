@@ -58,14 +58,34 @@ RewriteRule ^getSection$ index.php?adminAction=getSection [L,QSA]
 # URL rewriting for get informations (admin)
 RewriteRule ^getInformation$ index.php?adminAction=getInformation [L,QSA]
 
-# URL rewriting for add informations (admin)
-RewriteRule ^addInformation$ index.php?adminAction=addInformation [L,QSA]
-
 # URL rewriting for get informations by id (admin)
 RewriteRule ^getInformationById/([0-9]+)$ index.php?adminAction=getInformationById&informationId=$1 [L,QSA]
+
+# URL rewriting for add informations (admin)
+RewriteRule ^addInformation$ index.php?adminAction=addInformation [L,QSA]
 
 # URL rewriting for update informations (admin)
 RewriteRule ^updateInformation$ index.php?adminAction=updateInformation [L,QSA]
 
 # URL rewriting for delete informations (admin)
 RewriteRule ^deleteInformation$ index.php?adminAction=deleteInformation [L,QSA]
+
+
+# ADMIN - SOCIAL NETWORKS -------------------------------------------------------
+
+# URL rewriting for get social network (admin)
+RewriteRule ^getSocialNetwork$ index.php?adminAction=getSocialNetwork [L,QSA]
+
+
+# URL rewriting for get social network by id (admin)
+RewriteRule ^getSocialNetworkById/([0-9]+)$ index.php?adminAction=getSocialNetworkById&socialNetworkId=$1 [L,QSA]
+
+# URL rewriting for add social network (admin)
+RewriteRule ^addSocialNetwork$ index.php?adminAction=addSocialNetwork [L,QSA]
+
+
+# URL rewriting for update social network (admin)
+RewriteRule ^updateSocialNetwork$ index.php?adminAction=updateSocialNetwork [L,QSA]
+
+# URL rewriting for delete social network (admin)
+RewriteRule ^deleteSocialNetwork$ index.php?adminAction=deleteSocialNetwork [L,QSA]

@@ -60,6 +60,7 @@ class AdminUpdateProduct
             $productName = $_POST['productName'] ?? '';
             $productDescription = $_POST['productDescription'] ?? '';
             $productCategory = $_POST['productCategory'] ?? '';
+            $productSection = $_POST['productSection'] ?? '';
             $productImage = $_FILES['productImage'] ?? null;
     
             try 
@@ -113,10 +114,10 @@ class AdminUpdateProduct
                     $imagePath = $existingProduct['path'];
                 }
     
-                $request = "UPDATE product SET name = ?, description = ?, path = ?, slug = ?, categorie_id = ? WHERE id = ?";
+                $request = "UPDATE product SET name = ?, description = ?, path = ?, slug = ?, categorie_id = ?, section_id = ? WHERE id = ?";
                 
                 $pdo = $this->db->prepare($request);
-                $pdo->execute([$productName, $productDescription, $imagePath, $productSlug, $productCategory, $productId]);
+                $pdo->execute([$productName, $productDescription, $imagePath, $productSlug, $productCategory, $productSection, $productId]);
 
     
                 $request = "SELECT * FROM product WHERE id = ?";
