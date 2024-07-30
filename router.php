@@ -51,6 +51,15 @@ switch ($action) {
         $response = $login->getUser();
         break;
 
+    case "verifyToken":
+        if ($token) {
+            $verifyToken = new Login();
+            $response = $verifyToken->verifyToken($token);
+        } else {
+            $response = ["success" => false, "message" => "Token not provided"];
+        }
+        break;
+
     case "contact":
         $contact = new Contact();
         $response = $contact->sendEmail();
@@ -61,7 +70,7 @@ switch ($action) {
 
         switch ($adminAction) {
 
-            // PRODUCTS
+                // PRODUCTS
 
             case "getProduct":
                 $getProduct = new AdminProduct();
@@ -88,7 +97,7 @@ switch ($action) {
                 $response = $adminDeleteProduct->deleteProduct();
                 break;
 
-            // CATEGORIES
+                // CATEGORIES
 
             case "getProductCategory":
                 $productCategory = new AdminCategory();
@@ -115,14 +124,14 @@ switch ($action) {
                 $response = $deleteCategory->deleteCategory();
                 break;
 
-            // SECTIONS
+                // SECTIONS
 
             case "getSection":
                 $getSection = new AdminSection();
                 $response = $getSection->getSection();
                 break;
 
-            // INFORMATIONS
+                // INFORMATIONS
 
             case "getInformation":
                 $getInformation = new AdminInformation();
@@ -149,7 +158,7 @@ switch ($action) {
                 $response = $adminDeleteInformation->deleteInformation();
                 break;
 
-            // SOCIAL NETWORKS
+                // SOCIAL NETWORKS
 
             case "getSocialNetwork":
                 $getSocialNetwork = new AdminSocialNetwork();

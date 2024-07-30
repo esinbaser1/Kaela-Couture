@@ -17,31 +17,32 @@ class Signup
 
     public function createUser()
     {
-        // if($_SERVER['REQUEST_METHOD'] !== 'POST')
-        // {
-        //     return ["success" => false, "message" => "Method not allowed"];
-        // }
-        
         $input = file_get_contents("php://input");
         $data = json_decode($input, true);
 
-        $username = $data['username'] ?? null;
-        $email = $data['email'] ?? null;
-        $password = $data['password'] ?? null;
+        $username = isset($data['username']) ? strip_tags($data['username']) : null;
+        $email = isset($data['email']) ? filter_var($data['email'], FILTER_SANITIZE_EMAIL) : null;
+        $password = isset($data['password']) ? strip_tags($data['password']) : null;
 
-        if(!$username || !$email || !$password) 
+        if (empty($username) || empty($email) || empty($password)) 
         {
             return ["success" => false, "message" => "All fields are required"];
         }
 
         if ($this->emailExists($email)) {
-            echo json_encode(["success" => false, "message" => "This email is already used"]);
-            exit();
+            return ["success" => false, "message" => "This email is already used"];
         }
 
-        if ($this->usernameExists($username)) {
-            echo json_encode(["success" => false, "message" => "This username is already used"]);
-            exit();
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return ["success" => false, "message" => "Invalid email"];
+        }
+
+        if ($this->usernameExist($username)) {
+            return ["success" => false, "message" => "This username is already used"];
+        }
+
+        if (!$this->validatePassword($password)) {
+            return ["success" => false, "message" => "Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long."];
         }
 
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
@@ -66,9 +67,15 @@ class Signup
         $pdo->execute([$email]);
         return $pdo->fetchColumn() > 0;
     }
-    private function usernameExists($username) {
+
+    private function usernameExist($username) {
         $pdo = $this->db->prepare("SELECT COUNT(*) FROM user WHERE username = ?");
         $pdo->execute([$username]);
         return $pdo->fetchColumn() > 0;
+    }
+
+    private function validatePassword($password) {
+        $pattern = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/';
+        return preg_match($pattern, $password);
     }
 }

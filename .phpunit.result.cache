@@ -1,0 +1,1 @@
+{"version":1,"defects":{"LoginTest::testGetUserWithValidCredentials":7,"LoginTest::testTokenExpirationAndRenewal":7,"LoginTest::testTokenExpired":7},"times":{"LoginTest::testGetUserWithValidCredentials":0.126,"LoginTest::testTokenExpirationAndRenewal":0.007,"LoginTest::testTokenExpired":0.007,"LoginTest::testTokenRenewal":0}}

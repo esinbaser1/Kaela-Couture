@@ -8,6 +8,9 @@ RewriteRule ^signup$ index.php?action=signup [L,QSA]
 # URL rewriting for login
 RewriteRule ^login$ index.php?action=login [L,QSA]
 
+# URL rewriting for verify Token
+RewriteRule ^verifyToken$ index.php?action=verifyToken [L,QSA]
+
 # URL rewriting for contact
 RewriteRule ^contact$ index.php?action=contact [L,QSA]
 
@@ -89,3 +92,4 @@ RewriteRule ^updateSocialNetwork$ index.php?adminAction=updateSocialNetwork [L,Q
 
 # URL rewriting for delete social network (admin)
 RewriteRule ^deleteSocialNetwork$ index.php?adminAction=deleteSocialNetwork [L,QSA]
+
