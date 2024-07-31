@@ -5,6 +5,7 @@ require_once('vendor/autoload.php');
 use Models\Signup;
 use Models\Login;
 use Models\Contact;
+use Models\Token;
 
 //Admin Products
 use AdminProducts\AdminAddProduct;
@@ -36,6 +37,7 @@ use AdminSocialNetworks\AdminAddSocialNetwork;
 use AdminSocialNetworks\AdminUpdateSocialNetwork;
 use AdminSocialNetworks\AdminDeleteSocialNetwork;
 
+
 $action = $_REQUEST['action'] ?? null;
 
 $response = ["success" => false, "message" => "Action not found"];
@@ -51,14 +53,14 @@ switch ($action) {
         $response = $login->getUser();
         break;
 
-    case "verifyToken":
-        if ($token) {
-            $verifyToken = new Login();
-            $response = $verifyToken->verifyToken($token);
-        } else {
-            $response = ["success" => false, "message" => "Token not provided"];
-        }
-        break;
+        case "verifyToken":
+            if ($token) {
+                $tokenInstance = new Token();
+                $response = $tokenInstance->verifyToken($token);
+            } else {
+                $response = ["success" => false, "message" => "Token not provided"];
+            }
+            break;
 
     case "contact":
         $contact = new Contact();
