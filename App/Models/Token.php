@@ -41,7 +41,8 @@ class Token
                     "success" => true,
                     "message" => "Token is valid",
                     "token" => $newToken,
-                    "updatedToken" => $updatedToken
+                    "updatedToken" => $updatedToken,
+                    "user_id" => $session['user_id'] // Ajouter l'ID utilisateur ici
                 ];
             } else {
                 return ["success" => false, "message" => "Token expired or invalid"];
@@ -94,4 +95,3 @@ class Token
         return $formatter->format($date);
     }
 }
-?>

@@ -43,6 +43,7 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         'M' => 
         array (
             'Models\\' => 7,
+            'Middleware\\' => 11,
         ),
         'L' => 
         array (
@@ -74,6 +75,7 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
             'AdminSections\\' => 14,
             'AdminProducts\\' => 14,
             'AdminInformations\\' => 18,
+            'AdminComments\\' => 14,
             'AdminCategories\\' => 16,
         ),
     );
@@ -127,6 +129,10 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         array (
             0 => __DIR__ . '/../..' . '/App/Models',
         ),
+        'Middleware\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Middleware',
+        ),
         'Lib\\' => 
         array (
             0 => __DIR__ . '/../..' . '/lib',
@@ -178,6 +184,10 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         'AdminInformations\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App/Models/AdminInformations',
+        ),
+        'AdminComments\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models/AdminComments',
         ),
         'AdminCategories\\' => 
         array (

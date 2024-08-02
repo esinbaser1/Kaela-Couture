@@ -15,7 +15,7 @@ class AdminProduct
         $this->db = $database->getConnection();
     }
 
-    public function getProductAndCategorie()
+    public function getProduct()
     {
         try 
         {

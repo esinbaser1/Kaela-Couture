@@ -18,6 +18,7 @@ return array(
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Models\\' => array($baseDir . '/App/Models'),
+    'Middleware\\' => array($baseDir . '/App/Middleware'),
     'Lib\\' => array($baseDir . '/lib'),
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
     'Egulias\\EmailValidator\\' => array($vendorDir . '/egulias/email-validator/src'),
@@ -31,5 +32,6 @@ return array(
     'AdminSections\\' => array($baseDir . '/App/Models/AdminSections'),
     'AdminProducts\\' => array($baseDir . '/App/Models/AdminProducts'),
     'AdminInformations\\' => array($baseDir . '/App/Models/AdminInformations'),
+    'AdminComments\\' => array($baseDir . '/App/Models/AdminComments'),
     'AdminCategories\\' => array($baseDir . '/App/Models/AdminCategories'),
 );

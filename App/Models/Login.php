@@ -51,9 +51,10 @@ class Login
                 return [
                     "success" => true,
                     "message" => "Login successful",
-                    "token" => $token,
                     "role" => $user['role'],
-                    "user_id" => $user['id']
+                    "user_id" => $user['id'],
+                    "username" => $user['username'],
+                    "token" => $token,
                 ];
             } else {
                 return ["success" => false, "message" => "Incorrect email or password"];
@@ -63,5 +64,18 @@ class Login
             return ["success" => false, "message" => "An error occurred while processing your request"];
         }
     }
+
+    public function getUserById($userId)
+    {
+        try {
+            $request = "SELECT * FROM user WHERE id = ?";
+            $pdo = $this->db->prepare($request);
+            $pdo->execute([$userId]);
+
+            return $pdo->fetch(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            error_log("Error when fetching user by ID: " . $e->getMessage());
+            return null;
+        }
+    }
 }
-?>

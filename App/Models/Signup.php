@@ -53,7 +53,18 @@ class Signup
             $pdo = $this->db->prepare($request);
             $pdo->execute([$username, $email, $passwordHash]);
 
-            return ["success" => true, "message" => "User created successfully"];
+            $id = $this->db->lastInsertId();
+
+            $userData = [
+                'id' => $id,
+                "username" => $username,
+                "email" => $email,
+                "password" => $password
+            ];
+
+            return ["success" => true, "message" => "User created successfully", "data" => $userData];
+
+
         } 
         catch (\PDOException $e) 
         {

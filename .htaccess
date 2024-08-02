@@ -93,3 +93,11 @@ RewriteRule ^updateSocialNetwork$ index.php?adminAction=updateSocialNetwork [L,Q
 # URL rewriting for delete social network (admin)
 RewriteRule ^deleteSocialNetwork$ index.php?adminAction=deleteSocialNetwork [L,QSA]
 
+
+# ADMIN - COMMENTS -------------------------------------------------------
+
+# URL rewriting for get comment (admin)
+RewriteRule ^getComment$ index.php?adminAction=getComment [L,QSA]
+
+# URL rewriting for add comment (admin)
+RewriteRule ^addComment$ index.php?adminAction=addComment [L,QSA]

@@ -37,6 +37,10 @@ use AdminSocialNetworks\AdminAddSocialNetwork;
 use AdminSocialNetworks\AdminUpdateSocialNetwork;
 use AdminSocialNetworks\AdminDeleteSocialNetwork;
 
+//Admin Comments
+use AdminComments\AdminComment;
+use AdminComments\AdminAddComment;
+
 
 $action = $_REQUEST['action'] ?? null;
 
@@ -53,14 +57,14 @@ switch ($action) {
         $response = $login->getUser();
         break;
 
-        case "verifyToken":
-            if ($token) {
-                $tokenInstance = new Token();
-                $response = $tokenInstance->verifyToken($token);
-            } else {
-                $response = ["success" => false, "message" => "Token not provided"];
-            }
-            break;
+    case "verifyToken":
+        if ($token) {
+            $tokenInstance = new Token();
+            $response = $tokenInstance->verifyToken($token);
+        } else {
+            $response = ["success" => false, "message" => "Token not provided"];
+        }
+        break;
 
     case "contact":
         $contact = new Contact();
@@ -76,7 +80,7 @@ switch ($action) {
 
             case "getProduct":
                 $getProduct = new AdminProduct();
-                $response = $getProduct->getProductAndCategorie();
+                $response = $getProduct->getProduct();
                 break;
 
             case "getProductById":
@@ -186,6 +190,17 @@ switch ($action) {
             case "deleteSocialNetwork":
                 $deleteSocialNetwork = new AdminDeleteSocialNetwork();
                 $response = $deleteSocialNetwork->deleteSocialNetwork();
+                break;
+
+                // COMMENTS 
+            case "getComment":
+                $getComment = new AdminComment();
+                $response = $getComment->getComment();
+                break;
+
+            case "addComment":
+                $addComment = new AdminAddComment();
+                $response = $addComment->addComment();
                 break;
 
             default:
