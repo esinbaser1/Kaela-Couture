@@ -4,7 +4,7 @@ namespace AdminComments;
 
 use App\Database;
 
-class AdminAddComment
+class AddComment
 {
     protected $db;
 
@@ -28,22 +28,20 @@ class AdminAddComment
         }
 
         try {
-            $this->db->beginTransaction(); // Assure que l'insertion du commentaire et la récupération du nom d'utilisateur se produisent ensemble. Si une des opérations échoue, aucune des deux ne sera appliquée
+            $this->db->beginTransaction();
 
-            // Insérer le commentaire
             $request = "INSERT INTO comment (content, user_id, product_id) VALUES (?, ?, ?)";
             $pdo = $this->db->prepare($request);
             $pdo->execute([$content, $userId, $productId]);
 
             $id = $this->db->lastInsertId();
 
-            // Récupérer le nom d'utilisateur
             $requestUser = "SELECT username FROM user WHERE id = ?";
             $pdo = $this->db->prepare($requestUser);
             $pdo->execute([$userId]);
             $user = $pdo->fetch(\PDO::FETCH_ASSOC);
 
-            $this->db->commit(); // Applique toutes les opérations de la transaction à la bdd, les opérations sont définitivement enregistrées
+            $this->db->commit();
 
             $comment = [
                 'id' => $id,
@@ -56,7 +54,7 @@ class AdminAddComment
             return ["success" => true, "message" => "Comment added successfully!!!", "comment" => $comment];
 
         } catch (\PDOException $e) {
-            $this->db->rollBack(); // Annule toutes les opérations effectuées dans la transaction si une erreur survient, ramenant la bdd à l'état dans lequel elle se trouvait avant le début de la transaction
+            $this->db->rollBack();
             error_log("Error when adding comment: " . $e->getMessage());
             return ["success" => false, "message" => "Database error"];
         }

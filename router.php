@@ -38,9 +38,9 @@ use AdminSocialNetworks\AdminUpdateSocialNetwork;
 use AdminSocialNetworks\AdminDeleteSocialNetwork;
 
 //Admin Comments
-use AdminComments\AdminComment;
-use AdminComments\AdminAddComment;
-
+use AdminComments\Comment;
+use AdminComments\AddComment;
+use AdminComments\UpdateComment;
 
 $action = $_REQUEST['action'] ?? null;
 
@@ -59,8 +59,8 @@ switch ($action) {
 
     case "verifyToken":
         if ($token) {
-            $tokenInstance = new Token();
-            $response = $tokenInstance->verifyToken($token);
+            $verifyToken = new Token();
+            $response = $verifyToken->verifyToken($token);
         } else {
             $response = ["success" => false, "message" => "Token not provided"];
         }
@@ -193,15 +193,21 @@ switch ($action) {
                 break;
 
                 // COMMENTS 
-            case "getComment":
-                $getComment = new AdminComment();
-                $response = $getComment->getComment();
-                break;
-
-            case "addComment":
-                $addComment = new AdminAddComment();
-                $response = $addComment->addComment();
-                break;
+                case "getCommentsByProduct":
+                    $productId = $_REQUEST['productDetailId'] ?? null;
+                    if ($productId) {
+                        $comment = new Comment();
+                        $response = $comment->getCommentsByProduct($productId);
+                    } else {
+                        $response = ["success" => false, "message" => "Product ID not provided"];
+                    }
+                    break;
+            
+                case "addComment":
+                    $addComment = new AddComment();
+                    $response = $addComment->addComment();
+                    break;
+            
 
             default:
                 $response = ["success" => false, "message" => "Admin action not found"];

@@ -42,7 +42,7 @@ class Login
 
             if ($user && password_verify($password, $user['password'])) {
                 $token = $this->token->generateToken();
-                $tokenExpireAt = $this->token->formatDate('+2 minutes');
+                $tokenExpireAt = $this->token->formatDate('+30 days');
 
                 $request = "INSERT INTO sessions (user_id, token, expire_at) VALUES (?, ?, ?)";
                 $pdo = $this->db->prepare($request);

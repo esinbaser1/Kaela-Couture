@@ -20,29 +20,29 @@ class Token
     public function verifyToken($token)
     {
         try {
+            // Requête pour obtenir la session associée au token
             $request = "SELECT * FROM sessions WHERE token = ?";
             $pdo = $this->db->prepare($request);
             $pdo->execute([$token]);
 
+            // Récupération de la session
             $session = $pdo->fetch(\PDO::FETCH_ASSOC);
 
             if ($session) {
                 $currentTime = new DateTime();
                 $expireTime = new DateTime($session['expire_at']);
-                $newToken = $token;
-                $updatedToken = false;
 
-                if ($expireTime <= $currentTime || $currentTime->diff($expireTime)->i < 1) {
-                    $newToken = $this->renewToken($session['user_id'], $token);
-                    $updatedToken = true;
+                // Vérification de l'expiration du token
+                if ($expireTime <= $currentTime) {
+                    return ["success" => false, "message" => "Token expired or invalid"];
                 }
 
+                // Retourner les informations du token et de l'utilisateur
                 return [
                     "success" => true,
                     "message" => "Token is valid",
-                    "token" => $newToken,
-                    "updatedToken" => $updatedToken,
-                    "user_id" => $session['user_id'] // Ajouter l'ID utilisateur ici
+                    "token" => $token,
+                    "user_id" => $session['user_id'] // Retourne l'ID utilisateur pour identifier qui est connecté
                 ];
             } else {
                 return ["success" => false, "message" => "Token expired or invalid"];
@@ -51,24 +51,6 @@ class Token
             error_log("Error when verifying token: " . $e->getMessage());
             http_response_code(500);
             return ["success" => false, "message" => "An error occurred while verifying the token"];
-        }
-    }
-
-    public function renewToken($userId, $oldToken)
-    {
-        try {
-            $newToken = $this->generateToken();
-            $newExpireAt = $this->formatDate('+2 minutes');
-
-            $request = "UPDATE sessions SET token = ?, expire_at = ? WHERE user_id = ? AND token = ?";
-            $pdo = $this->db->prepare($request);
-            $pdo->execute([$newToken, $newExpireAt, $userId, $oldToken]);
-
-            return $newToken;
-        } catch (\PDOException $e) {
-            error_log("Error when renewing token: " . $e->getMessage());
-            http_response_code(500);
-            return ["success" => false, "message" => "An error occurred while renewing the token"];
         }
     }
 
