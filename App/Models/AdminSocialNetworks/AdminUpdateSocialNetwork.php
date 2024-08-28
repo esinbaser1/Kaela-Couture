@@ -45,13 +45,28 @@ class AdminUpdateSocialNetwork
         $input = file_get_contents("php://input");
         $data = json_decode($input, true);
 
-        $socialNetworkId = isset($data['id']) ? strip_tags($data['id']) : null;
-        $platform = isset($data['platform']) ? strip_tags($data['platform']) : null;
-        $url = isset($data['url']) ? strip_tags($data['url']) : null;
+        $socialNetworkId = isset($data['id']) ? trim(strip_tags($data['id'])) : null;
+        $platform = isset($data['platform']) ? trim(strip_tags($data['platform'])) : null;
+        $url = isset($data['url']) ? trim(strip_tags($data['url'])) : null;
 
         if (empty($socialNetworkId) || empty($platform) || empty($url)) {
-            return ["success" => false, "message" => "Missing information for update"];
+            return ["success" => false, "message" => "All fields must be filled"];
         }
+
+               // Récupérer les données actuelles du produit
+        $request = "SELECT * FROM social_network WHERE id = ?";
+        $pdo = $this->db->prepare($request);
+        $pdo->execute([$socialNetworkId]);
+        $existingSocialNetwork = $pdo->fetch(\PDO::FETCH_ASSOC);
+
+           // Vérifier si aucune modification n'a été apportée
+        if(
+            $platform ==  $existingSocialNetwork ['platform'] &&
+            $url == $existingSocialNetwork ['url']
+        ) {
+            return ["success" => false, "message" => "No changes detected"];
+        }
+
 
         try {
             $request = "UPDATE social_network SET platform = ?, url = ? WHERE id = ?";

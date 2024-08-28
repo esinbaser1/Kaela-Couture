@@ -54,7 +54,7 @@ class AdminDeleteProduct
                     unlink($imagePath);
                 }
 
-                return ["success" => true, "message" => "Product deleted successfully"];
+                return ["success" => true, "message" => "Product deleted successfully!!!"];
             } 
             else 
             {

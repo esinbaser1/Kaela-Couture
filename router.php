@@ -207,6 +207,8 @@ switch ($action) {
                     $addComment = new AddComment();
                     $response = $addComment->addComment();
                     break;
+
+                    
             
 
             default:

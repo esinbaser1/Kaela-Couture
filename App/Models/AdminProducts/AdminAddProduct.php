@@ -20,20 +20,19 @@ class AdminAddProduct
 
     public function addProduct()
     {
-        $productName = isset($_POST['productName']) ? strip_tags($_POST['productName']) : null;
-        $productDescription = isset($_POST['productDescription']) ? strip_tags($_POST['productDescription']) : null;
+        $productName = isset($_POST['productName']) ? trim(strip_tags($_POST['productName'])) : null;
+        $productDescription = isset($_POST['productDescription']) ? trim(strip_tags($_POST['productDescription'])) : null;
         $productCategory = isset($_POST['productCategory']) ? strip_tags($_POST['productCategory']) : null;
         $productSection = isset($_POST['productSection']) ? strip_tags($_POST['productSection']) : null;
         $productImage = isset($_FILES['productImage']) ? $_FILES['productImage'] : null;
 
         if (empty($productName) || empty($productDescription) || empty($productCategory) || empty($productImage) || empty($productSection)) 
         {
-            return ["success" => false, "message" => "All fields are required"];
+            return ["success" => false, "message" => "Please complete all fields"];
         }
 
         if ($this->nameExist($productName)) {
            return ["success" => false, "message" => "This name is already used"];
-            exit();
         }
 
         $productSlug = $this->slug->sluguer($productName);

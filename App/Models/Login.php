@@ -61,7 +61,6 @@ class Login
             }
         } catch (\PDOException $e) {
             error_log("Error when logging in user: " . $e->getMessage());
-            return ["success" => false, "message" => "An error occurred while processing your request"];
         }
     }
 

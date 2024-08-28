@@ -62,7 +62,7 @@ class Signup
                 "password" => $password
             ];
 
-            return ["success" => true, "message" => "User created successfully", "data" => $userData];
+            return ["success" => true, "message" => "Account created successfully. Redirecting...", "data" => $userData];
 
 
         } 

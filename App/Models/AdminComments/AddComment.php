@@ -51,12 +51,12 @@ class AddComment
                 'username' => $user['username']
             ];
 
-            return ["success" => true, "message" => "Comment added successfully!!!", "comment" => $comment];
+            return ["success" => true, "message" => "Comment added successfully!", "comment" => $comment];
 
         } catch (\PDOException $e) {
             $this->db->rollBack();
             error_log("Error when adding comment: " . $e->getMessage());
-            return ["success" => false, "message" => "Database error"];
+            return ["success" => false, "message" => "Failed to add comment due to a database error. Please try again."];
         }
     }
 }

@@ -19,8 +19,12 @@ class AdminAddSocialNetwork
         $input = file_get_contents("php://input");
         $data = json_decode($input, true);
 
-        $platform = isset($data['platform']) ? strip_tags($data['platform']) : null;
-        $url = isset($data['url']) ? strip_tags($data['url']) : null;
+        $platform = isset($data['platform']) ? trim(strip_tags($data['platform'])) : null;
+        $url = isset($data['url']) ? trim(strip_tags($data['url'])) : null;
+
+        if(empty($platform) || empty($url)) {
+            return ["success" => false, "message" => "Please complete all fields"];
+        }
 
         try 
         {

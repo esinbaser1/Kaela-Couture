@@ -45,13 +45,28 @@ class AdminUpdateInformation
         $data = json_decode($input, true);
 
         $informationId = isset($data['id']) ? strip_tags($data['id']) : null;
-        $description = isset($data['description']) ? strip_tags($data['description']) : null;
-        $mobile = isset($data['mobile']) ? strip_tags($data['mobile']) : null;
-        $address = isset($data['address']) ? strip_tags($data['address']) : null;
+        $description = isset($data['description']) ? trim(strip_tags($data['description'])) : null;
+        $mobile = isset($data['mobile']) ? trim(strip_tags($data['mobile'])) : null;
+        $address = isset($data['address']) ? trim(strip_tags($data['address'])) : null;
 
-        if (empty($informationId) || empty($description)) {
-            error_log("Missing information for update");
-            return ["success" => false, "message" => "Missing information for update"];
+        if (empty($mobile) && empty($description) && empty($address)) {
+            return ["success" => false, "message" => "At least one field must be filled"];
+        }
+
+        // Récupérer les données actuelles du produit
+        $request = "SELECT * FROM about_me WHERE id = ?";
+        $pdo = $this->db->prepare($request);
+        $pdo->execute([$informationId]);
+        $existingInformation = $pdo->fetch(\PDO::FETCH_ASSOC);
+
+        // Vérifier si aucune modification n'a été apportée
+        if (
+            $description == $existingInformation['description'] &&
+            $mobile == $existingInformation['mobile'] &&
+            $address == $existingInformation['address']
+        ) 
+        {
+            return ["success" => false, "message" => "No changes detected"];
         }
 
         try {

@@ -19,16 +19,22 @@ class AdminAddInformation
         $input = file_get_contents("php://input");
         $data = json_decode($input, true);
 
-        $description = isset($data['description']) ? strip_tags($data['description']) : null;
-        $mobile = isset($data['mobile']) ? strip_tags($data['mobile']) : null;
-        $address = isset($data['address']) ? strip_tags($data['address']) : null;
+        // Nettoyage des données entrantes, trim pour effacer les espaces 
+        $description = isset($data['description']) ? trim(strip_tags($data['description'])) : null;
+        $mobile = isset($data['mobile']) ? trim(strip_tags($data['mobile'])) : null;
+        $address = isset($data['address']) ? trim(strip_tags($data['address'])) : null;
 
-        if (!preg_match('/^\+?[0-9]*$/', $mobile)) 
+        if (empty($description) && empty($mobile) && empty($address)) {
+            return ["success" => false, "message" => "At least one field must be filled"];
+        }
+
+        // Vérification du format du numéro de mobile
+        if (!empty($mobile) && !preg_match('/^\+?[0-9]*$/', $mobile)) 
         {
             return ["success" => false, "message" => "Invalid mobile number format"];
         }
 
-        try 
+        try
         {
             $request = "INSERT INTO about_me (description, mobile, address) VALUES (?, ?, ?)";
             $pdo = $this->db->prepare($request);
