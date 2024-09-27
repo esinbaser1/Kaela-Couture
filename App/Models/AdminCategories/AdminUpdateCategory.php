@@ -4,42 +4,49 @@ namespace AdminCategories;
 
 use App\Database;
 
+// Class to handle updating an existing category in the admin panel
 class AdminUpdateCategory
 {
     protected $db;
-    protected $adminCategoryById;
 
+    // Initializes the database connection
     public function __construct()
     {
         $database = new Database();
         $this->db = $database->getConnection();
-        $this->adminCategoryById = new AdminCategoryById();
     }
 
+    // Method to update the category
     public function updateCategory()
     {
+        // Retrieve the input data from the HTTP request and decode it from JSON
         $input = file_get_contents("php://input");
         $data = json_decode($input, true);
 
+        // Sanitize and retrieve the category details from the input data
         $categoryId = isset($data['id']) ? strip_tags($data['id']) : null;
         $categoryName = isset($data['name']) ? trim(strip_tags($data['name'])) : null;
         $categoryDescription = isset($data['description']) ? trim(strip_tags($data['description'])) : null;
         $categoryPageTitle = isset($data['page_title']) ? trim(strip_tags($data['page_title'])) : null;
         $categoryPageDescription = isset($data['page_description']) ? trim(strip_tags($data['page_description'])) : null;
 
-
-        if (empty($categoryName) || empty($categoryDescription) || empty($categoryPageTitle) || empty($categoryPageDescription)) {
+        // Check if any required fields are missing
+        if (empty($categoryName) || empty($categoryDescription) || empty($categoryPageTitle) || empty($categoryPageDescription)) 
+        {
             return ["success" => false, "message" => "All fields must be filled"];
         }
 
-        // Récupérer les données actuelles du produit
+        // Fetch the current category data from the database
         $request = "SELECT * FROM categorie WHERE id = ?";
         $pdo = $this->db->prepare($request);
         $pdo->execute([$categoryId]);
-        $existingCategory = $pdo->fetch((\PDO::FETCH_ASSOC));
+        $existingCategory = $pdo->fetch(\PDO::FETCH_ASSOC);
 
-        // Vérifier si aucune modification n'a été apportée
+        if (!$existingCategory) {
+            return ["success" => false, "message" => "Category not found"];
+        }
 
+        // Check if no changes were made to the category details
         if (
             $categoryName == $existingCategory['name'] &&
             $categoryDescription  == $existingCategory['description'] &&
@@ -49,54 +56,43 @@ class AdminUpdateCategory
             return ["success" => false, "message" => "No changes detected"];
         }
 
-        if ($this->nameExist($categoryName, $categoryId)) {
+        // Check if the new category name already exists
+        if ($this->nameExist($categoryName, $categoryId)) 
+        {
             return ["success" => false, "message" => "This name is already used"];
         }
-        
 
-        try {
-            // Sauvegarder l'ID de la catégorie dans $_GET pour réutiliser la méthode existante
-            $_GET['categoryId'] = $categoryId;
-
-            // Récupérer les valeurs actuelles de la catégorie en utilisant la méthode existante
-            $currentCategory = $this->adminCategoryById->getCategoryById();
-
-            if (!$currentCategory['success']) {
-                return ["success" => false, "message" => "Category not found"];
-            }
-
-            $currentCategoryData = $currentCategory['categoryById'];
-
-            // Utiliser les valeurs actuelles si les nouvelles sont nulles
-            $categoryName = $categoryName ?? $currentCategoryData['name'];
-            $categoryDescription = $categoryDescription ?? $currentCategoryData['description'];
-            $categoryPageTitle = $categoryPageTitle ?? $currentCategoryData['page_title'];
-            $categoryPageDescription = $categoryPageDescription ?? $currentCategoryData['page_description'];
-
+        try 
+        {
+            // SQL query to update the category with the new values
             $request = "UPDATE categorie SET name = ?, description = ?, page_title = ?, page_description = ? WHERE id = ?";
             $pdo = $this->db->prepare($request);
             $pdo->execute([$categoryName, $categoryDescription, $categoryPageTitle, $categoryPageDescription, $categoryId]);
 
-            return ["success" => true, "message" => "Category updated successfully", "categoryUpdate" => [
+            // Return a success response with the updated category data
+            return ["success" => true, "message" => "Category updated successfully", "categoryUpdate" => 
+            [
                 'id' => $categoryId,
                 'name' => $categoryName,
                 'description' => $categoryDescription,
                 'page_title' => $categoryPageTitle,
                 'page_description' => $categoryPageDescription,
             ]];
-        } catch (\PDOException $e) {
-            error_log("Error when updating category : " . $e->getMessage());
-
+        } 
+        catch (\PDOException $e) 
+        {
+            // Return a failure response
             return ["success" => false, "message" => "Database error"];
         }
     }
 
+    // Private method to check if the category name already exists (excluding the current category ID)
     private function nameExist($categoryName, $categoryId = null)
-{
-  //En ajoutant AND id != ?, la vérification d'unicité ne prend pas en compte le nom actuelle, ca empêche le système de détecter le nom de la catégorie comme déjà utilisé s'il n'a pas changé car si non ca me met toujours This name is already used meme si je n'ai pas modifié le nom
-    $query = "SELECT COUNT(*) FROM categorie WHERE name = ? AND id != ?";
-    $pdo = $this->db->prepare($query);
-    $pdo->execute([$categoryName, $categoryId]);
-    return $pdo->fetchColumn() > 0;
-}
+    {
+        // This query checks if the name exists, excluding the current category ID to avoid conflict when updating
+        $query = "SELECT COUNT(*) FROM categorie WHERE name = ? AND id != ?";
+        $pdo = $this->db->prepare($query);
+        $pdo->execute([$categoryName, $categoryId]);
+        return $pdo->fetchColumn() > 0;
+    }
 }

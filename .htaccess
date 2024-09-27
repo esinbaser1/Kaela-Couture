@@ -8,11 +8,13 @@ RewriteRule ^signup$ index.php?action=signup [L,QSA]
 # URL rewriting for login
 RewriteRule ^login$ index.php?action=login [L,QSA]
 
-# URL rewriting for verify Token
-RewriteRule ^verifyToken$ index.php?action=verifyToken [L,QSA]
-
 # URL rewriting for contact
 RewriteRule ^contact$ index.php?action=contact [L,QSA]
+
+# ADMIN -------------------------------------------------------
+
+# URL rewriting for get products (admin)
+RewriteRule ^admin$ index.php?adminAction=admin [L,QSA]
 
 # ADMIN - PRODUCTS -------------------------------------------------------
 

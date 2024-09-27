@@ -5,8 +5,6 @@ use App\Database;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as PHPMailerException;
 
-require_once "variables.php";
-
 class Contact 
 {
     protected $db;
@@ -17,6 +15,7 @@ class Contact
         $this->db = $database->getConnection();
     }
 
+    // Méthode d'envoi d'email
     public function sendEmail()
     {
         $input = file_get_contents("php://input");
@@ -31,20 +30,23 @@ class Contact
         }
 
         try {
-            $request = "INSERT INTO send_email (email, object, message) VALUES (?,?,?)";
+            // Insérer les données dans la base de données
+            $request = "INSERT INTO contact (email, object, message) VALUES (?,?,?)";
             $pdo = $this->db->prepare($request);
             $pdo->execute([$email, $object, $message]);
 
+            // Configuration de PHPMailer
             $mail = new PHPMailer(true); 
             $mail->isSMTP(); 
-            $mail->Host = 'smtp.gmail.com';
+            $mail->Host = 'smtp.gmail.com'; 
             $mail->SMTPAuth = true;
-            $mail->Username = getenv('SMTP_USERNAME');
-            $mail->Password = getenv('SMTP_PASSWORD');
+            $mail->Username = 'hokablese@gmail.com';
+            $mail->Password = 'clfyuxcwcuddrgcu';  
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587; 
             $mail->CharSet = 'UTF-8';
 
+            // Configuration de l'email
             $mail->setFrom($email); 
             $mail->addAddress('hokablese@gmail.com'); 
             $mail->addReplyTo($email);
@@ -53,6 +55,7 @@ class Contact
             $mail->Subject = $object;
             $mail->Body = nl2br($message);
 
+            // Envoyer l'email
             if ($mail->send()) 
             {
                 return ["success" => true, "message" => "Mail sent successfully"];

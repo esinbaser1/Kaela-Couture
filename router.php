@@ -5,7 +5,6 @@ require_once('vendor/autoload.php');
 use Models\Signup;
 use Models\Login;
 use Models\Contact;
-use Models\Token;
 
 //Admin Products
 use AdminProducts\AdminAddProduct;
@@ -40,13 +39,17 @@ use AdminSocialNetworks\AdminDeleteSocialNetwork;
 //Admin Comments
 use AdminComments\Comment;
 use AdminComments\AddComment;
-use AdminComments\UpdateComment;
+
+
+use Utils\AuthUtils;
+$authMiddleware = new AuthUtils();
 
 $action = $_REQUEST['action'] ?? null;
 
 $response = ["success" => false, "message" => "Action not found"];
 
 switch ($action) {
+
     case "signup":
         $signup = new Signup();
         $response = $signup->createUser();
@@ -57,26 +60,26 @@ switch ($action) {
         $response = $login->getUser();
         break;
 
-    case "verifyToken":
-        if ($token) {
-            $verifyToken = new Token();
-            $response = $verifyToken->verifyToken($token);
-        } else {
-            $response = ["success" => false, "message" => "Token not provided"];
-        }
-        break;
-
     case "contact":
         $contact = new Contact();
         $response = $contact->sendEmail();
         break;
 
     default:
-        $adminAction = $_REQUEST['adminAction'] ?? null;
 
+        $adminAction = $_REQUEST['adminAction'] ?? null;
         switch ($adminAction) {
 
-                // PRODUCTS
+            case 'admin':
+                $authResult = $authMiddleware->verifyAccess('admin');
+                if ($authResult !== null) {
+                    $response = $authResult;
+                } else {
+                    $response = ["success" => true, "role" => "admin"];
+                }
+                break;
+
+            // PRODUCTS
 
             case "getProduct":
                 $getProduct = new AdminProduct();
@@ -89,18 +92,33 @@ switch ($action) {
                 break;
 
             case "addProduct":
+                $authResult = $authMiddleware->verifyAccess('admin');
+                if ($authResult !== null) {
+                    $response = $authResult;
+                } else {
                 $adminAddProduct = new AdminAddProduct();
                 $response = $adminAddProduct->addProduct();
+                }
                 break;
 
             case "updateProduct":
+                $authResult = $authMiddleware->verifyAccess('admin');
+                if ($authResult !== null) {
+                    $response = $authResult;
+                } else {
                 $adminUpdateProduct = new AdminUpdateProduct();
                 $response = $adminUpdateProduct->updateProduct();
+                }
                 break;
 
             case "deleteProduct":
+                $authResult = $authMiddleware->verifyAccess('admin');
+                if ($authResult !== null) {
+                    $response = $authResult;
+                } else {
                 $adminDeleteProduct = new AdminDeleteProduct();
                 $response = $adminDeleteProduct->deleteProduct();
+                }
                 break;
 
                 // CATEGORIES
@@ -116,18 +134,33 @@ switch ($action) {
                 break;
 
             case "addCategory":
+                $authResult = $authMiddleware->verifyAccess('admin');
+                if ($authResult !== null) {
+                    $response = $authResult;
+                } else {
                 $addCategory = new AdminAddCategory();
                 $response = $addCategory->addCategory();
+                }
                 break;
 
             case "updateCategory":
+                $authResult = $authMiddleware->verifyAccess('admin');
+                if ($authResult !== null) {
+                    $response = $authResult;
+                } else {
                 $updateCategory = new AdminUpdateCategory();
                 $response = $updateCategory->updateCategory();
+                }
                 break;
 
             case "deleteCategory":
+                $authResult = $authMiddleware->verifyAccess('admin');
+                if ($authResult !== null) {
+                    $response = $authResult;
+                } else {
                 $deleteCategory = new AdminDeleteCategory();
                 $response = $deleteCategory->deleteCategory();
+                }
                 break;
 
                 // SECTIONS
@@ -145,8 +178,13 @@ switch ($action) {
                 break;
 
             case "addInformation":
+                $authResult = $authMiddleware->verifyAccess('admin');
+                if ($authResult !== null) {
+                    $response = $authResult;
+                } else {
                 $addInformation = new AdminAddInformation();
                 $response = $addInformation->addInformation();
+                }
                 break;
 
             case "getInformationById":
@@ -155,13 +193,23 @@ switch ($action) {
                 break;
 
             case "updateInformation":
+                $authResult = $authMiddleware->verifyAccess('admin');
+                if ($authResult !== null) {
+                    $response = $authResult;
+                } else {
                 $adminUpdateInformation = new AdminUpdateInformation();
                 $response = $adminUpdateInformation->updateInformation();
+                }
                 break;
 
             case "deleteInformation":
+                $authResult = $authMiddleware->verifyAccess('admin');
+                if ($authResult !== null) {
+                    $response = $authResult;
+                } else {
                 $adminDeleteInformation = new AdminDeleteInformation();
                 $response = $adminDeleteInformation->deleteInformation();
+                }
                 break;
 
                 // SOCIAL NETWORKS
@@ -172,24 +220,38 @@ switch ($action) {
                 break;
 
             case "getSocialNetworkById":
-                // $socialNetworkId = $_GET['socialNetworkId'] ?? null;
                 $getSocialNetworkById = new AdminUpdateSocialNetwork();
                 $response = $getSocialNetworkById->getSocialNetworkById();
                 break;
 
             case "addSocialNetwork":
+                $authResult = $authMiddleware->verifyAccess('admin');
+                if ($authResult !== null) {
+                    $response = $authResult;
+                } else {
                 $addSocialNetwork = new AdminAddSocialNetwork();
                 $response = $addSocialNetwork->addSocialNetwork();
+                }
                 break;
 
             case "updateSocialNetwork":
+                $authResult = $authMiddleware->verifyAccess('admin');
+                if ($authResult !== null) {
+                    $response = $authResult;
+                } else {
                 $updateSocialNetwork = new AdminUpdateSocialNetwork();
                 $response = $updateSocialNetwork->updateSocialNetwork();
+                }
                 break;
 
             case "deleteSocialNetwork":
+                $authResult = $authMiddleware->verifyAccess('admin');
+                if ($authResult !== null) {
+                    $response = $authResult;
+                } else {
                 $deleteSocialNetwork = new AdminDeleteSocialNetwork();
                 $response = $deleteSocialNetwork->deleteSocialNetwork();
+                }
                 break;
 
                 // COMMENTS 
@@ -207,9 +269,6 @@ switch ($action) {
                     $addComment = new AddComment();
                     $response = $addComment->addComment();
                     break;
-
-                    
-            
 
             default:
                 $response = ["success" => false, "message" => "Admin action not found"];

@@ -20,9 +20,9 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
     );
 
     public static $prefixLengthsPsr4 = array (
-        'T' => 
+        'U' => 
         array (
-            'Traits\\' => 7,
+            'Utils\\' => 6,
         ),
         'S' => 
         array (
@@ -43,7 +43,6 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         'M' => 
         array (
             'Models\\' => 7,
-            'Middleware\\' => 11,
         ),
         'L' => 
         array (
@@ -52,6 +51,10 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         'G' => 
         array (
             'GrahamCampbell\\ResultType\\' => 26,
+        ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
         ),
         'E' => 
         array (
@@ -81,9 +84,9 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
     );
 
     public static $prefixDirsPsr4 = array (
-        'Traits\\' => 
+        'Utils\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/App/Models/Traits',
+            0 => __DIR__ . '/../..' . '/App/Utils',
         ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
@@ -129,10 +132,6 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         array (
             0 => __DIR__ . '/../..' . '/App/Models',
         ),
-        'Middleware\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Middleware',
-        ),
         'Lib\\' => 
         array (
             0 => __DIR__ . '/../..' . '/lib',
@@ -140,6 +139,10 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         'GrahamCampbell\\ResultType\\' => 
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'Egulias\\EmailValidator\\' => 
         array (
@@ -601,6 +604,7 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         'PHPUnit\\Framework\\MockObject\\MockObjectInternal' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/Interface/MockObjectInternal.php',
         'PHPUnit\\Framework\\MockObject\\MutableStubApi' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/Api/MutableStubApi.php',
         'PHPUnit\\Framework\\MockObject\\NeverReturningMethodException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Exception/NeverReturningMethodException.php',
+        'PHPUnit\\Framework\\MockObject\\NoMoreReturnValuesConfiguredException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Exception/NoMoreReturnValuesConfiguredException.php',
         'PHPUnit\\Framework\\MockObject\\ProxiedCloneMethod' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/Api/ProxiedCloneMethod.php',
         'PHPUnit\\Framework\\MockObject\\ReflectionException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Exception/ReflectionException.php',
         'PHPUnit\\Framework\\MockObject\\ReturnValueGenerator' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/ReturnValueGenerator.php',
@@ -835,6 +839,8 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         'PHPUnit\\Runner\\GarbageCollection\\GarbageCollectionHandler' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/GarbageCollection/GarbageCollectionHandler.php',
         'PHPUnit\\Runner\\GarbageCollection\\Subscriber' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/GarbageCollection/Subscriber/Subscriber.php',
         'PHPUnit\\Runner\\GarbageCollection\\TestFinishedSubscriber' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/GarbageCollection/Subscriber/TestFinishedSubscriber.php',
+        'PHPUnit\\Runner\\HookMethod' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/HookMethod/HookMethod.php',
+        'PHPUnit\\Runner\\HookMethodCollection' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/HookMethod/HookMethodCollection.php',
         'PHPUnit\\Runner\\InvalidOrderException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/Exception/InvalidOrderException.php',
         'PHPUnit\\Runner\\InvalidPhptFileException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/Exception/InvalidPhptFileException.php',
         'PHPUnit\\Runner\\NoIgnoredEventException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Runner/Exception/NoIgnoredEventException.php',
@@ -1085,6 +1091,7 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         'PHPUnit\\Util\\Color' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Color.php',
         'PHPUnit\\Util\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Exception/Exception.php',
         'PHPUnit\\Util\\ExcludeList' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/ExcludeList.php',
+        'PHPUnit\\Util\\Exporter' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Exporter.php',
         'PHPUnit\\Util\\Filesystem' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Filesystem.php',
         'PHPUnit\\Util\\Filter' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Filter.php',
         'PHPUnit\\Util\\GlobalState' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/GlobalState.php',
@@ -1287,6 +1294,7 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         'SebastianBergmann\\Comparator\\ComparisonFailure' => __DIR__ . '/..' . '/sebastian/comparator/src/ComparisonFailure.php',
         'SebastianBergmann\\Comparator\\DOMNodeComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/DOMNodeComparator.php',
         'SebastianBergmann\\Comparator\\DateTimeComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/DateTimeComparator.php',
+        'SebastianBergmann\\Comparator\\EnumerationComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/EnumerationComparator.php',
         'SebastianBergmann\\Comparator\\Exception' => __DIR__ . '/..' . '/sebastian/comparator/src/exceptions/Exception.php',
         'SebastianBergmann\\Comparator\\ExceptionComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ExceptionComparator.php',
         'SebastianBergmann\\Comparator\\Factory' => __DIR__ . '/..' . '/sebastian/comparator/src/Factory.php',
