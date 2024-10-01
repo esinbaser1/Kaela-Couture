@@ -4,7 +4,7 @@ namespace AdminProducts;
 
 use App\Database;
 use Lib\Slug;
-use Components\ConvertToWebP;
+use Utils\ConvertToWebP;
 
 // Class responsible for handling the update of existing products in the admin panel
 class AdminUpdateProduct

@@ -4,7 +4,7 @@ namespace AdminProducts;
 
 use App\Database;
 use Lib\Slug;
-use Components\ConvertToWebP;
+use Utils\ConvertToWebP;
 
 // Class to handle adding new products in the admin panel
 class AdminAddProduct

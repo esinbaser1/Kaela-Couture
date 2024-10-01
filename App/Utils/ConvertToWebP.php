@@ -1,5 +1,5 @@
 <?php
-namespace Components;
+namespace Utils;
 
 class ConvertToWebP 
 {
