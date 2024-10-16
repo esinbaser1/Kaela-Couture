@@ -5,7 +5,7 @@ namespace AdminProducts;
 use App\Database;
 
 // Class to handle retrieving product in the admin panel
-class AdminProduct
+class ProductModel
 {
     protected $db; 
 

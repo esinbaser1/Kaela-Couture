@@ -7,7 +7,7 @@ use Lib\Slug;
 use Utils\ConvertToWebP;
 
 // Class to handle adding new products in the admin panel
-class AdminAddProduct
+class AddProductModel
 {
     protected $db;
     protected $slug;

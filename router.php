@@ -2,43 +2,43 @@
 
 require_once('vendor/autoload.php');
 
-use Models\Signup;
-use Models\Login;
-use Models\Contact;
+use Models\SignupModel;
+use Models\LoginModel;
+use Models\ContactModel;
 
 //Admin Products
-use AdminProducts\AdminAddProduct;
-use AdminProducts\AdminUpdateProduct;
-use AdminProducts\AdminProduct;
-use AdminProducts\AdminDeleteProduct;
+use AdminProducts\AddProductModel;
+use AdminProducts\UpdateProductModel;
+use AdminProducts\ProductModel;
+use AdminProducts\DeleteProductModel;
 
 //Admin Categories
-use AdminCategories\AdminCategory;
-use AdminCategories\AdminAddCategory;
-use AdminCategories\AdminCategoryById;
-use AdminCategories\AdminUpdateCategory;
-use AdminCategories\AdminDeleteCategory;
+use AdminCategories\CategoryModel;
+use AdminCategories\AddCategoryModel;
+use AdminCategories\CategoryByIdModel;
+use AdminCategories\UpdateCategoryModel;
+use AdminCategories\DeleteCategoryModel;
 
 //Admin Sections
 
-use AdminSections\AdminSection;
+use AdminSections\SectionModel;
 
 //Admin Informations
-use AdminInformations\AdminInformation;
-use AdminInformations\AdminAddInformation;
-use AdminInformations\AdminUpdateInformation;
-use AdminInformations\AdminDeleteInformation;
+use AdminInformations\InformationModel;
+use AdminInformations\AddInformationModel;
+use AdminInformations\UpdateInformationModel;
+use AdminInformations\DeleteInformationModel;
 
 //Admin Social Networks
 
-use AdminSocialNetworks\AdminSocialNetwork;
-use AdminSocialNetworks\AdminAddSocialNetwork;
-use AdminSocialNetworks\AdminUpdateSocialNetwork;
-use AdminSocialNetworks\AdminDeleteSocialNetwork;
+use AdminSocialNetworks\SocialNetworkModel;
+use AdminSocialNetworks\AddSocialNetworkModel;
+use AdminSocialNetworks\UpdateSocialNetworkModel;
+use AdminSocialNetworks\DeleteSocialNetworkModel;
 
 //Admin Comments
-use AdminComments\Comment;
-use AdminComments\AddComment;
+use AdminComments\CommentModel;
+use AdminComments\AddCommentModel;
 
 
 use Utils\AuthUtils;
@@ -51,17 +51,17 @@ $response = ["success" => false, "message" => "Action not found"];
 switch ($action) {
 
     case "signup":
-        $signup = new Signup();
+        $signup = new SignupModel();
         $response = $signup->createUser();
         break;
 
     case "login":
-        $login = new Login();
+        $login = new LoginModel();
         $response = $login->getUser();
         break;
 
     case "contact":
-        $contact = new Contact();
+        $contact = new ContactModel();
         $response = $contact->sendEmail();
         break;
 
@@ -82,12 +82,12 @@ switch ($action) {
             // PRODUCTS
 
             case "getProduct":
-                $getProduct = new AdminProduct();
+                $getProduct = new ProductModel();
                 $response = $getProduct->getProduct();
                 break;
 
             case "getProductById":
-                $getProductById = new AdminUpdateProduct();
+                $getProductById = new UpdateProductModel();
                 $response = $getProductById->getProductById();
                 break;
 
@@ -96,8 +96,8 @@ switch ($action) {
                 if ($authResult !== null) {
                     $response = $authResult;
                 } else {
-                $adminAddProduct = new AdminAddProduct();
-                $response = $adminAddProduct->addProduct();
+                $addProduct = new AddProductModel();
+                $response = $addProduct->addProduct();
                 }
                 break;
 
@@ -106,8 +106,8 @@ switch ($action) {
                 if ($authResult !== null) {
                     $response = $authResult;
                 } else {
-                $adminUpdateProduct = new AdminUpdateProduct();
-                $response = $adminUpdateProduct->updateProduct();
+                $updateProduct = new UpdateProductModel();
+                $response = $updateProduct->updateProduct();
                 }
                 break;
 
@@ -116,20 +116,20 @@ switch ($action) {
                 if ($authResult !== null) {
                     $response = $authResult;
                 } else {
-                $adminDeleteProduct = new AdminDeleteProduct();
-                $response = $adminDeleteProduct->deleteProduct();
+                $deleteProduct = new DeleteProductModel();
+                $response = $deleteProduct->deleteProduct();
                 }
                 break;
 
                 // CATEGORIES
 
             case "getProductCategory":
-                $productCategory = new AdminCategory();
+                $productCategory = new CategoryModel();
                 $response = $productCategory->getCategorie();
                 break;
 
             case "getCategoryById":
-                $productCategoryById = new AdminCategoryById();
+                $productCategoryById = new CategoryByIdModel();
                 $response = $productCategoryById->getCategoryById();
                 break;
 
@@ -138,7 +138,7 @@ switch ($action) {
                 if ($authResult !== null) {
                     $response = $authResult;
                 } else {
-                $addCategory = new AdminAddCategory();
+                $addCategory = new AddCategoryModel();
                 $response = $addCategory->addCategory();
                 }
                 break;
@@ -148,7 +148,7 @@ switch ($action) {
                 if ($authResult !== null) {
                     $response = $authResult;
                 } else {
-                $updateCategory = new AdminUpdateCategory();
+                $updateCategory = new UpdateCategoryModel();
                 $response = $updateCategory->updateCategory();
                 }
                 break;
@@ -158,7 +158,7 @@ switch ($action) {
                 if ($authResult !== null) {
                     $response = $authResult;
                 } else {
-                $deleteCategory = new AdminDeleteCategory();
+                $deleteCategory = new DeleteCategoryModel();
                 $response = $deleteCategory->deleteCategory();
                 }
                 break;
@@ -166,14 +166,14 @@ switch ($action) {
                 // SECTIONS
 
             case "getSection":
-                $getSection = new AdminSection();
+                $getSection = new SectionModel();
                 $response = $getSection->getSection();
                 break;
 
                 // INFORMATIONS
 
             case "getInformation":
-                $getInformation = new AdminInformation();
+                $getInformation = new InformationModel();
                 $response = $getInformation->getInformations();
                 break;
 
@@ -182,13 +182,13 @@ switch ($action) {
                 if ($authResult !== null) {
                     $response = $authResult;
                 } else {
-                $addInformation = new AdminAddInformation();
+                $addInformation = new AddInformationModel();
                 $response = $addInformation->addInformation();
                 }
                 break;
 
             case "getInformationById":
-                $getInformationById = new AdminUpdateInformation();
+                $getInformationById = new UpdateInformationModel();
                 $response = $getInformationById->getInformationById();
                 break;
 
@@ -197,8 +197,8 @@ switch ($action) {
                 if ($authResult !== null) {
                     $response = $authResult;
                 } else {
-                $adminUpdateInformation = new AdminUpdateInformation();
-                $response = $adminUpdateInformation->updateInformation();
+                $updateInformation = new UpdateInformationModel();
+                $response = $updateInformation->updateInformation();
                 }
                 break;
 
@@ -207,20 +207,20 @@ switch ($action) {
                 if ($authResult !== null) {
                     $response = $authResult;
                 } else {
-                $adminDeleteInformation = new AdminDeleteInformation();
-                $response = $adminDeleteInformation->deleteInformation();
+                $deleteInformation = new DeleteInformationModel();
+                $response = $deleteInformation->deleteInformation();
                 }
                 break;
 
                 // SOCIAL NETWORKS
 
             case "getSocialNetwork":
-                $getSocialNetwork = new AdminSocialNetwork();
+                $getSocialNetwork = new SocialNetworkModel();
                 $response = $getSocialNetwork->getSocialNetwork();
                 break;
 
             case "getSocialNetworkById":
-                $getSocialNetworkById = new AdminUpdateSocialNetwork();
+                $getSocialNetworkById = new UpdateSocialNetworkModel();
                 $response = $getSocialNetworkById->getSocialNetworkById();
                 break;
 
@@ -229,7 +229,7 @@ switch ($action) {
                 if ($authResult !== null) {
                     $response = $authResult;
                 } else {
-                $addSocialNetwork = new AdminAddSocialNetwork();
+                $addSocialNetwork = new AddSocialNetworkModel();
                 $response = $addSocialNetwork->addSocialNetwork();
                 }
                 break;
@@ -239,7 +239,7 @@ switch ($action) {
                 if ($authResult !== null) {
                     $response = $authResult;
                 } else {
-                $updateSocialNetwork = new AdminUpdateSocialNetwork();
+                $updateSocialNetwork = new UpdateSocialNetworkModel();
                 $response = $updateSocialNetwork->updateSocialNetwork();
                 }
                 break;
@@ -249,7 +249,7 @@ switch ($action) {
                 if ($authResult !== null) {
                     $response = $authResult;
                 } else {
-                $deleteSocialNetwork = new AdminDeleteSocialNetwork();
+                $deleteSocialNetwork = new DeleteSocialNetworkModel();
                 $response = $deleteSocialNetwork->deleteSocialNetwork();
                 }
                 break;
@@ -258,7 +258,7 @@ switch ($action) {
                 case "getCommentsByProduct":
                     $productId = $_REQUEST['productDetailId'] ?? null;
                     if ($productId) {
-                        $comment = new Comment();
+                        $comment = new CommentModel();
                         $response = $comment->getCommentsByProduct($productId);
                     } else {
                         $response = ["success" => false, "message" => "Product ID not provided"];
@@ -266,7 +266,7 @@ switch ($action) {
                     break;
             
                 case "addComment":
-                    $addComment = new AddComment();
+                    $addComment = new AddCommentModel();
                     $response = $addComment->addComment();
                     break;
 

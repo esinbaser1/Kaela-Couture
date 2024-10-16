@@ -6,7 +6,7 @@ use Lib\Slug;
 use App\Database;
 
 // Class to handle adding new categories in the admin panel
-class AdminAddCategory
+class AddCategoryModel
 {
     protected $db;  
     protected $slug;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Models;
+namespace Utils;
 
 use Firebase\JWT\JWT;
 use Dotenv\Dotenv;
@@ -16,17 +16,18 @@ class Token
     }
 
     // Generates a JWT with username, role, and user_id
-    public function generateToken($userId, $userRole, $username)
+    public function generateToken($userId, $userRole, $username, $email)
     {
         $issuedAt = time();
-        $expirationTime = $issuedAt + 3600; // The token expires after 1 hour
+        $expirationTime = $issuedAt + (7 * 86400); // Le token expire après 7 jours
 
         $payload = [
             'iat' => $issuedAt,
             'exp' => $expirationTime,
             'user_id' => $userId,
             'role' => $userRole,
-            'username' => $username  // Adds the username to the payload
+            'username' => $username,
+            'email' => $email, // Adds the username to the payload
         ];
 
         // Generate the JWT token using the secret key

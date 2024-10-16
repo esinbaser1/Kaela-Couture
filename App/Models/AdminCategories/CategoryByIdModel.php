@@ -5,7 +5,7 @@ namespace AdminCategories;
 use App\Database;
 
 // Class to retrieve a specific category by its ID in the admin panel
-class AdminCategoryById
+class CategoryByIdModel
 {
     protected $db;
 

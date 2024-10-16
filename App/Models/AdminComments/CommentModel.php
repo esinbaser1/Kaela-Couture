@@ -5,7 +5,7 @@ namespace AdminComments;
 use App\Database;
 
 // Class to manage comments, specifically for retrieving comments by product ID
-class Comment
+class CommentModel
 {
     protected $db;
 

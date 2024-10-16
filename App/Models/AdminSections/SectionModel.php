@@ -5,7 +5,7 @@ namespace AdminSections;
 use App\Database;
 
 // Class to handle the retrieval of sections in the admin panel
-class AdminSection 
+class SectionModel 
 {
     protected $db;
 

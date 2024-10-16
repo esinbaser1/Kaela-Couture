@@ -5,7 +5,7 @@ namespace AdminComments;
 use App\Database;
 
 // Class to handle adding a new comment
-class AddComment
+class AddCommentModel
 {
     protected $db;
 

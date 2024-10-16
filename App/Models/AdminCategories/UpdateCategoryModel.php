@@ -5,7 +5,7 @@ namespace AdminCategories;
 use App\Database;
 
 // Class to handle updating an existing category in the admin panel
-class AdminUpdateCategory
+class UpdateCategoryModel
 {
     protected $db;
 

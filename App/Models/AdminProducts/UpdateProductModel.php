@@ -7,7 +7,7 @@ use Lib\Slug;
 use Utils\ConvertToWebP;
 
 // Class responsible for handling the update of existing products in the admin panel
-class AdminUpdateProduct
+class UpdateProductModel
 {
     protected $db;
     protected $slug;

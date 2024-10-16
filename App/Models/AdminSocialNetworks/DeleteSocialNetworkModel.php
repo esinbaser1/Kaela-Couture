@@ -5,7 +5,7 @@ namespace AdminSocialNetworks;
 use App\Database;
 
 // Class to handle the deletion of social network entries in the admin panel
-class AdminDeleteSocialNetwork
+class DeleteSocialNetworkModel
 {
     protected $db;
 

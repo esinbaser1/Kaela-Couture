@@ -5,7 +5,7 @@ namespace Models;
 use App\Database;
 
 // The Signup class handles user registration
-class Signup 
+class SignupModel 
 {
     protected $db;
 

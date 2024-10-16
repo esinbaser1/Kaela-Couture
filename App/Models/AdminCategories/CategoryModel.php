@@ -5,7 +5,7 @@ namespace AdminCategories;
 use App\Database;
 
 // Class to handle the retrieval of categories in the admin panel
-class AdminCategory 
+class CategoryModel
 {
     protected $db;
 

@@ -5,7 +5,7 @@ namespace AdminProducts;
 use App\Database;
 
 // Class responsible for handling the deletion of products in the admin panel
-class AdminDeleteProduct
+class DeleteProductModel
 {
     protected $db;
 

@@ -5,7 +5,7 @@ namespace AdminInformations;
 use App\Database;
 
 // Class to handle retrieving information in the admin panel
-class AdminInformation
+class InformationModel
 {
     protected $db; 
 

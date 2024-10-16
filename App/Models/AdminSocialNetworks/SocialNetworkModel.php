@@ -4,7 +4,7 @@ namespace AdminSocialNetworks;
 use App\Database;
 
 // Class to handle the retrieval of social networks in the admin panel
-class AdminSocialNetwork
+class SocialNetworkModel
 {
     protected $db;
 

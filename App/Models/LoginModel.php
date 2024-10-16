@@ -3,10 +3,10 @@
 namespace Models;
 
 use App\Database;
-use Models\Token;
+use Utils\Token;
 
 // This class handles user login functionality
-class Login
+class LoginModel
 {
     protected $db;
     protected $token;
@@ -53,7 +53,7 @@ class Login
             if ($user && password_verify($password, $user['password'])) 
             {
                 // If credentials are valid, generate a JWT token
-                $token = $this->token->generateToken($user['id'], $user['role'], $user['username']);
+                $token = $this->token->generateToken($user['id'], $user['role'], $user['username'], $user['email']);
 
                 // Return a success response with the user details and JWT token
                 return [
@@ -62,6 +62,7 @@ class Login
                     "role" => $user['role'],
                     "user_id" => $user['id'],
                     "username" => $user['username'],
+                    "email" => $user["email"],
                     "token" => $token
                 ];
             } 

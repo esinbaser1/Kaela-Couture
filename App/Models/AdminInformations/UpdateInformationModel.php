@@ -5,7 +5,7 @@ namespace AdminInformations;
 use App\Database;
 
 // Class to handle updating existing information in the admin panel
-class AdminUpdateInformation
+class UpdateInformationModel
 {
     protected $db;
 

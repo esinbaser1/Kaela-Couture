@@ -5,7 +5,7 @@ namespace AdminSocialNetworks;
 use App\Database;
 
 // Class to handle adding a new social network to the admin panel
-class AdminAddSocialNetwork
+class AddSocialNetworkModel
 {
     protected $db;
 
@@ -31,6 +31,12 @@ class AdminAddSocialNetwork
         if (empty($platform) || empty($url)) 
         {
             return ["success" => false, "message" => "Please complete all fields"];
+        }
+
+
+        if (!filter_var($url, FILTER_VALIDATE_URL)) 
+        {
+            return ["success" => false, "message" => "Invalid url."];
         }
 
         try 

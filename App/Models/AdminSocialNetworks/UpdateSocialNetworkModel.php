@@ -5,7 +5,7 @@ namespace AdminSocialNetworks;
 use App\Database;
 
 // Class responsible for handling the update of social network entries in the admin panel
-class AdminUpdateSocialNetwork
+class UpdateSocialNetworkModel
 {
     protected $db;
 

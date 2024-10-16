@@ -67,10 +67,6 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
             'Doctrine\\Common\\Lexer\\' => 22,
             'DeepCopy\\' => 9,
         ),
-        'C' => 
-        array (
-            'Components\\' => 11,
-        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -163,10 +159,6 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         'DeepCopy\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
-        ),
-        'Components\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Components',
         ),
         'App\\' => 
         array (

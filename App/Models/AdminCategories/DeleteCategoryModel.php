@@ -3,7 +3,7 @@ namespace AdminCategories;
 use App\Database;
 
 // Class to handle deleting a category in the admin panel
-class AdminDeleteCategory
+class DeleteCategoryModel
 {
     protected $db;
 

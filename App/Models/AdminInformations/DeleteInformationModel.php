@@ -4,7 +4,7 @@ namespace AdminInformations;
 use App\Database;
 
 // Class to handle the deletion of information
-class AdminDeleteInformation
+class DeleteInformationModel
 {
     protected $db; 
 

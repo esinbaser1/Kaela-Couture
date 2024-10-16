@@ -26,7 +26,6 @@ return array(
     'Doctrine\\Deprecations\\' => array($vendorDir . '/doctrine/deprecations/lib/Doctrine/Deprecations'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/src'),
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
-    'Components\\' => array($baseDir . '/App/Components'),
     'App\\' => array($baseDir . '/App'),
     'AdminSocialNetworks\\' => array($baseDir . '/App/Models/AdminSocialNetworks'),
     'AdminSections\\' => array($baseDir . '/App/Models/AdminSections'),
