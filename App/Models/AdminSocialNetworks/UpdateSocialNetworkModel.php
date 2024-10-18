@@ -62,6 +62,12 @@ class UpdateSocialNetworkModel
             return ["success" => false, "message" => "All fields must be filled"];
         }
 
+         // Checks if the url is valid
+        if (!filter_var($url, FILTER_VALIDATE_URL)) 
+        {
+            return ["success" => false, "message" => "Invalid url."];
+        }
+
         // Fetch the current social network data from the database
         $existingSocialNetwork = $this->fetchSocialNetworkById($socialNetworkId);
 

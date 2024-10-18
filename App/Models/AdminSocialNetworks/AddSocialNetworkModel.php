@@ -33,7 +33,7 @@ class AddSocialNetworkModel
             return ["success" => false, "message" => "Please complete all fields"];
         }
 
-
+        // Checks if the url is valid
         if (!filter_var($url, FILTER_VALIDATE_URL)) 
         {
             return ["success" => false, "message" => "Invalid url."];
