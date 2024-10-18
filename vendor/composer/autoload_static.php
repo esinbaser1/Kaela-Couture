@@ -33,27 +33,26 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
             'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
             'Symfony\\Polyfill\\Iconv\\' => 23,
             'Symfony\\Polyfill\\Ctype\\' => 23,
-            'SocialNetworksManagement\\' => 25,
-            'SectionsManagement\\' => 19,
         ),
         'P' => 
         array (
-            'ProductsManagement\\' => 19,
             'PhpParser\\' => 10,
             'PhpOption\\' => 10,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
+            'Models\\SocialNetworksManagement\\' => 32,
+            'Models\\SectionsManagement\\' => 26,
+            'Models\\ProductsManagement\\' => 26,
+            'Models\\InformationsManagement\\' => 30,
+            'Models\\CommentsManagement\\' => 26,
+            'Models\\CategoriesManagement\\' => 28,
             'Models\\' => 7,
         ),
         'L' => 
         array (
             'Lib\\' => 4,
-        ),
-        'I' => 
-        array (
-            'InformationsManagement\\' => 23,
         ),
         'G' => 
         array (
@@ -76,8 +75,13 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         ),
         'C' => 
         array (
-            'CommentsManagement\\' => 19,
-            'CategoriesManagement\\' => 21,
+            'Controllers\\SocialNetworksManagement\\' => 37,
+            'Controllers\\SectionsManagement\\' => 31,
+            'Controllers\\ProductsManagement\\' => 31,
+            'Controllers\\InformationsManagement\\' => 35,
+            'Controllers\\CommentsManagement\\' => 31,
+            'Controllers\\CategoriesManagement\\' => 33,
+            'Controllers\\' => 12,
         ),
         'A' => 
         array (
@@ -118,18 +122,6 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'SocialNetworksManagement\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Models/SocialNetworksManagement',
-        ),
-        'SectionsManagement\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Models/SectionsManagement',
-        ),
-        'ProductsManagement\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Models/ProductsManagement',
-        ),
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
@@ -142,6 +134,30 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
+        'Models\\SocialNetworksManagement\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models/SocialNetworksManagement',
+        ),
+        'Models\\SectionsManagement\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models/SectionsManagement',
+        ),
+        'Models\\ProductsManagement\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models/ProductsManagement',
+        ),
+        'Models\\InformationsManagement\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models/InformationsManagement',
+        ),
+        'Models\\CommentsManagement\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models/CommentsManagement',
+        ),
+        'Models\\CategoriesManagement\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models/CategoriesManagement',
+        ),
         'Models\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App/Models',
@@ -149,10 +165,6 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         'Lib\\' => 
         array (
             0 => __DIR__ . '/../..' . '/lib',
-        ),
-        'InformationsManagement\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Models/InformationsManagement',
         ),
         'GrahamCampbell\\ResultType\\' => 
         array (
@@ -182,13 +194,33 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
-        'CommentsManagement\\' => 
+        'Controllers\\SocialNetworksManagement\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/App/Models/CommentsManagement',
+            0 => __DIR__ . '/../..' . '/App/Controllers/SocialNetworksManagement',
         ),
-        'CategoriesManagement\\' => 
+        'Controllers\\SectionsManagement\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/App/Models/CategoriesManagement',
+            0 => __DIR__ . '/../..' . '/App/Controllers/SectionsManagement',
+        ),
+        'Controllers\\ProductsManagement\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Controllers/ProductsManagement',
+        ),
+        'Controllers\\InformationsManagement\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Controllers/InformationsManagement',
+        ),
+        'Controllers\\CommentsManagement\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Controllers/CommentsManagement',
+        ),
+        'Controllers\\CategoriesManagement\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Controllers/CategoriesManagement',
+        ),
+        'Controllers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Controllers',
         ),
         'App\\' => 
         array (

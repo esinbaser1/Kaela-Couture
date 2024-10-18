@@ -1,6 +1,6 @@
 <?php
 
-namespace SocialNetworksManagement;
+namespace Models\SocialNetworksManagement;
 
 use App\Database;
 
@@ -16,54 +16,22 @@ class AddSocialNetworkModel
         $this->db = $database->getConnection();
     }
 
-    // Method to add a new social network entry to the database
-    public function addSocialNetwork()
+    // Method to insert a new social network into the database
+    public function insertSocialNetwork($platform, $url)
     {
-        // Get the input data from the request body (JSON format)
-        $input = file_get_contents("php://input");
-        $data = json_decode($input, true);
+        $request = "INSERT INTO social_network (platform, url) VALUES (?, ?)";
+        $pdo = $this->db->prepare($request);
+        $pdo->execute([$platform, $url]);
 
-        // Sanitize and retrieve the platform and URL from the input
-        $platform = isset($data['platform']) ? trim(strip_tags($data['platform'])) : null;
-        $url = isset($data['url']) ? trim(strip_tags($data['url'])) : null;
-
-        // Check if any required fields are missing
-        if (empty($platform) || empty($url)) 
-        {
-            return ["success" => false, "message" => "Please complete all fields"];
-        }
-
-        // Checks if the url is valid
-        if (!filter_var($url, FILTER_VALIDATE_URL)) 
-        {
-            return ["success" => false, "message" => "Invalid url."];
-        }
-
-        try 
-        {
-            // SQL query to insert the new social network into the database
-            $request = "INSERT INTO social_network (platform, url) VALUES (?, ?)";
-            $pdo = $this->db->prepare($request);
-            $pdo->execute([$platform, $url]);
-
-            // Get the ID of the newly inserted social network
-            $id = $this->db->lastInsertId();
-            
-            // Prepare the newly added social network data for the response
-            $newSocialNetwork = [
-                'id' => $id,
-                'platform' => $platform,
-                'url' => $url,
-            ];
-
-            // Return success response with the new social network data
-            return ["success" => true, "message" => "Social network added successfully!!!", "socialNetwork" => $newSocialNetwork];
-
-        } 
-        catch (\PDOException $e) 
-        {
-            // Return a failure response
-            return ["success" => false, "message" => "Database error"];
-        }
+        // Return the ID of the newly inserted social network
+        return $this->db->lastInsertId();
     }
+        // Check if a platform name and url already exists in the database
+        public function existsInColumn($column, $value)
+        {
+            $query = "SELECT COUNT(*) FROM social_network WHERE $column = ?";
+            $pdo = $this->db->prepare($query);
+            $pdo->execute([$value]);
+            return $pdo->fetchColumn() > 0;
+        }
 }

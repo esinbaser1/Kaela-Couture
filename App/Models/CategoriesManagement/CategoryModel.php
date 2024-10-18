@@ -1,6 +1,6 @@
 <?php
 
-namespace CategoriesManagement;
+namespace Models\CategoriesManagement;
 
 use App\Database;
 
@@ -17,22 +17,20 @@ class CategoryModel
     }
 
     // Method to retrieve all categories from the database
-    public function getCategorie()
+    public function getCategories()
     {
         try 
         {
             // SQL query to select all categories
             $request = "SELECT * FROM categorie";
             $pdo = $this->db->query($request);
-            $category = $pdo->fetchAll(\PDO::FETCH_ASSOC);
+            return $pdo->fetchAll(\PDO::FETCH_ASSOC); 
 
-            // Return the list of categories with a success response
-            return ["success" => true, "category" => $category];
         } 
         catch (\PDOException $e) 
         {
-            // Return a failure response
-            return ["success" => false, "message" => "Database error"];
+            // Throw an exception to handle in the controller
+            throw new \Exception("Database error: " . $e->getMessage());
         }
     }
 }

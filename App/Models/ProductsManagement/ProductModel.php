@@ -1,10 +1,10 @@
 <?php
 
-namespace ProductsManagement;
+namespace Models\ProductsManagement;
 
 use App\Database;
 
-// Class to handle retrieving product in the admin panel
+// Class to retrieve product data in the admin panel
 class ProductModel
 {
     protected $db; 
@@ -28,15 +28,12 @@ class ProductModel
                         JOIN section ON product.section_id = section.id";
             
             $pdo = $this->db->query($request);
-            $product = $pdo->fetchAll(\PDO::FETCH_ASSOC);
-            
-            // Return success response along with the fetched product data
-            return [ "success" => true, "product" => $product];
+            return $pdo->fetchAll(\PDO::FETCH_ASSOC);
         }
         catch(\PDOException $e)
         {
-            // Return failure response if a database error occurs
-            return ["success" => false, "message" => "Database error"];
+            // Throw exception if a database error occurs
+            throw new \Exception("Database error");
         }
     }
 }

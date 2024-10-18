@@ -1,6 +1,6 @@
 <?php
 
-namespace CategoriesManagement;
+namespace Models\CategoriesManagement;
 
 use Lib\Slug;
 use App\Database;
@@ -19,34 +19,9 @@ class AddCategoryModel
         $this->slug = new Slug();
     }
 
-    // Method to add a new category
-    public function addCategory()
+    // Method to add a new category to the database
+    public function addCategory($categoryName, $description, $pageTitle, $pageDescription, $categoryNameSlug)
     {
-        // Get the input data from the HTTP request and decode the JSON
-        $input = file_get_contents("php://input");
-        $data = json_decode($input, true);
-
-        // Sanitize and validate the input fields
-        $categoryName = isset($data['categoryName']) ? trim(strip_tags($data['categoryName'])) : null;
-        $description = isset($data['categoryDescription']) ? trim(strip_tags($data['categoryDescription'])) : null;
-        $pageTitle = isset($data['categoryPageTitle']) ? trim(strip_tags($data['categoryPageTitle'])) : null;
-        $pageDescription = isset($data['categoryPageDescription']) ? trim(strip_tags($data['categoryPageDescription'])) : null;
-
-        // Check if any required fields are missing
-        if (empty($categoryName) || empty($description) || empty($pageTitle) || empty($pageDescription)) 
-        {
-            return ["success" => false, "message" => "Please complete all fields"];
-        }
-
-        // Generate a slug for the category name
-        $categoryNameSlug = $this->slug->sluguer($categoryName);
-
-        // Check if the category name already exists in the database
-        if ($this->nameExist($categoryName)) 
-        {
-            return ["success" => false, "message" => "This name is already used"];
-        }
-
         try 
         {
             // SQL query to insert the new category into the database
@@ -56,30 +31,20 @@ class AddCategoryModel
 
             // Get the ID of the newly inserted category
             $categoryId = $this->db->lastInsertId();
-            
-            // Prepare the new category data to return in the response
-            $newCategory = [
-                'id' => $categoryId,
-                'name' => $categoryName,
-                'description' => $description,
-                'page_title' => $pageTitle,
-                'page_description' => $pageDescription,
-                'slug' => $categoryNameSlug,
-            ];
 
-            // Return a success response with the new category data
-            return ["success" => true, "message" => "Category added successfully!!!", "category" => $newCategory];
+            // Return the new category ID for further use
+            return $categoryId;
 
         } 
         catch (\PDOException $e) 
         {
-            // Return a failure response
-            return ["success" => false, "message" => "Database error: " . $e->getMessage()];
+            // Handle and propagate database errors
+            throw new \Exception("Database error: " . $e->getMessage());
         }
     }
 
-    // Private method to check if a category name already exists in the database
-    private function nameExist($categoryName)
+    // Check if a category name already exists in the database
+    public function nameExist($categoryName)
     {
         $pdo = $this->db->prepare("SELECT COUNT(*) FROM categorie WHERE name = ?");
         $pdo->execute([$categoryName]);

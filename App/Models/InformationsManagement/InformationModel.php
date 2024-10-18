@@ -1,18 +1,17 @@
 <?php
 
-namespace InformationsManagement;
+namespace Models\InformationsManagement;
 
 use App\Database;
 
-// Class to handle retrieving information in the admin panel
 class InformationModel
 {
-    protected $db; 
+    protected $db;
 
     // Initializes the database connection
     public function __construct()
     {
-        $database = new Database(); 
+        $database = new Database();
         $this->db = $database->getConnection();
     }
 
@@ -23,11 +22,8 @@ class InformationModel
         {
             // SQL query to select all data
             $request = "SELECT * FROM information";
-            $pdo = $this->db->query($request); 
-            $information = $pdo->fetchAll(\PDO::FETCH_ASSOC);
-
-            // Return a success response with the retrieved information
-            return ["success" => true, "information" => $information];
+            $pdo = $this->db->query($request);
+            return $pdo->fetchAll(\PDO::FETCH_ASSOC);
 
         } 
         catch (\PDOException $e) 

@@ -1,6 +1,6 @@
 <?php
 
-namespace CommentsManagement;
+namespace Models\CommentsManagement;
 
 use App\Database;
 
@@ -17,13 +17,12 @@ class CommentModel
     }
 
     // Method to retrieve all comments for a specific product using its product ID
-    public function getCommentsByProduct($productId)
+    public function fetchCommentsByProduct($productId)
     {
         try 
         {
             // SQL query to select comments for the specified product ID
             // The query joins the 'comment' table with the 'user' table to get the username
-            // Uses COALESCE to return 'Deleted user' (User deleted) if the user has been deleted
             $request = "SELECT 
             comment.*, 
             COALESCE(user.username, 'Deleted user') AS username, 
@@ -36,14 +35,14 @@ class CommentModel
             $pdo->execute([$productId]); 
             $comments = $pdo->fetchAll(\PDO::FETCH_ASSOC);
 
-            // Return a success response with the comments
-            return ["success" => true, "comments" => $comments];
+            // Return the list of comments
+            return $comments;
 
         } 
         catch (\PDOException $e) 
         {
-            // Return a failure response
-            return ["success" => false, "message" => "Database error"];
+            // Throw an exception if an error occurs
+            throw new \Exception("Database error: " . $e->getMessage());
         }
     }
 }
