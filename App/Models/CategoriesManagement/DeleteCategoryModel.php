@@ -1,5 +1,5 @@
 <?php
-namespace AdminCategories;
+namespace CategoriesManagement;
 use App\Database;
 
 // Class to handle deleting a category in the admin panel

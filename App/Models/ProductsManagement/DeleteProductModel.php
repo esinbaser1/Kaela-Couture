@@ -1,6 +1,6 @@
 <?php
 
-namespace AdminProducts;
+namespace ProductsManagement;
 
 use App\Database;
 

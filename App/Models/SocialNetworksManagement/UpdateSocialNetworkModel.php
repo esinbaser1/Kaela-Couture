@@ -1,6 +1,6 @@
 <?php
 
-namespace AdminSocialNetworks;
+namespace SocialNetworksManagement;
 
 use App\Database;
 

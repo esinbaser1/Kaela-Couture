@@ -1,5 +1,5 @@
 <?php
-namespace AdminInformations;
+namespace InformationsManagement;
 
 use App\Database;
 

@@ -33,9 +33,12 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
             'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
             'Symfony\\Polyfill\\Iconv\\' => 23,
             'Symfony\\Polyfill\\Ctype\\' => 23,
+            'SocialNetworksManagement\\' => 25,
+            'SectionsManagement\\' => 19,
         ),
         'P' => 
         array (
+            'ProductsManagement\\' => 19,
             'PhpParser\\' => 10,
             'PhpOption\\' => 10,
             'PHPMailer\\PHPMailer\\' => 20,
@@ -47,6 +50,10 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         'L' => 
         array (
             'Lib\\' => 4,
+        ),
+        'I' => 
+        array (
+            'InformationsManagement\\' => 23,
         ),
         'G' => 
         array (
@@ -67,15 +74,14 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
             'Doctrine\\Common\\Lexer\\' => 22,
             'DeepCopy\\' => 9,
         ),
+        'C' => 
+        array (
+            'CommentsManagement\\' => 19,
+            'CategoriesManagement\\' => 21,
+        ),
         'A' => 
         array (
             'App\\' => 4,
-            'AdminSocialNetworks\\' => 20,
-            'AdminSections\\' => 14,
-            'AdminProducts\\' => 14,
-            'AdminInformations\\' => 18,
-            'AdminComments\\' => 14,
-            'AdminCategories\\' => 16,
         ),
     );
 
@@ -112,6 +118,18 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
+        'SocialNetworksManagement\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models/SocialNetworksManagement',
+        ),
+        'SectionsManagement\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models/SectionsManagement',
+        ),
+        'ProductsManagement\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models/ProductsManagement',
+        ),
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
@@ -131,6 +149,10 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         'Lib\\' => 
         array (
             0 => __DIR__ . '/../..' . '/lib',
+        ),
+        'InformationsManagement\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models/InformationsManagement',
         ),
         'GrahamCampbell\\ResultType\\' => 
         array (
@@ -160,33 +182,17 @@ class ComposerStaticInitd8c520f5ee64c739400a75db7848810f
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
+        'CommentsManagement\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models/CommentsManagement',
+        ),
+        'CategoriesManagement\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App/Models/CategoriesManagement',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/App',
-        ),
-        'AdminSocialNetworks\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Models/AdminSocialNetworks',
-        ),
-        'AdminSections\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Models/AdminSections',
-        ),
-        'AdminProducts\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Models/AdminProducts',
-        ),
-        'AdminInformations\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Models/AdminInformations',
-        ),
-        'AdminComments\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Models/AdminComments',
-        ),
-        'AdminCategories\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/App/Models/AdminCategories',
         ),
     );
 

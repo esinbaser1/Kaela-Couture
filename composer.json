@@ -7,12 +7,12 @@
             "App\\": "App/",
             "Models\\": "App/Models/",
             "Lib\\": "lib/",
-            "AdminInformations\\": "App/Models/AdminInformations/",
-            "AdminProducts\\": "App/Models/AdminProducts/",
-            "AdminCategories\\": "App/Models/AdminCategories/",
-            "AdminSections\\": "App/Models/AdminSections/",
-            "AdminSocialNetworks\\": "App/Models/AdminSocialNetworks/",
-            "AdminComments\\": "App/Models/AdminComments/",
+            "InformationsManagement\\": "App/Models/InformationsManagement/",
+            "ProductsManagement\\": "App/Models/ProductsManagement/",
+            "CategoriesManagement\\": "App/Models/CategoriesManagement/",
+            "SectionsManagement\\": "App/Models/SectionsManagement/",
+            "SocialNetworksManagement\\": "App/Models/SocialNetworksManagement/",
+            "CommentsManagement\\": "App/Models/CommentsManagement/",
             "Utils\\": "App/Utils/"
         }
     },

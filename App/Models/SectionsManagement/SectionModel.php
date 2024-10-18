@@ -1,6 +1,6 @@
 <?php
 
-namespace AdminSections;
+namespace SectionsManagement;
 
 use App\Database;
 

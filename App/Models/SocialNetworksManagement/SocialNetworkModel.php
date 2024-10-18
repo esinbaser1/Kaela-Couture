@@ -1,6 +1,6 @@
 <?php
 
-namespace AdminSocialNetworks;
+namespace SocialNetworksManagement;
 use App\Database;
 
 // Class to handle the retrieval of social networks in the admin panel

@@ -1,6 +1,6 @@
 <?php
 
-namespace AdminComments;
+namespace CommentsManagement;
 
 use App\Database;
 

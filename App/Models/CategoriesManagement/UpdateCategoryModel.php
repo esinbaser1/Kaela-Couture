@@ -1,6 +1,6 @@
 <?php
 
-namespace AdminCategories;
+namespace CategoriesManagement;
 
 use App\Database;
 

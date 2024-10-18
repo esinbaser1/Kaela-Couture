@@ -1,6 +1,6 @@
 <?php
 
-namespace AdminCategories;
+namespace CategoriesManagement;
 
 use Lib\Slug;
 use App\Database;

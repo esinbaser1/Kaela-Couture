@@ -7,38 +7,38 @@ use Models\LoginModel;
 use Models\ContactModel;
 
 //Admin Products
-use AdminProducts\AddProductModel;
-use AdminProducts\UpdateProductModel;
-use AdminProducts\ProductModel;
-use AdminProducts\DeleteProductModel;
+use ProductsManagement\AddProductModel;
+use ProductsManagement\UpdateProductModel;
+use ProductsManagement\ProductModel;
+use ProductsManagement\DeleteProductModel;
 
 //Admin Categories
-use AdminCategories\CategoryModel;
-use AdminCategories\AddCategoryModel;
-use AdminCategories\CategoryByIdModel;
-use AdminCategories\UpdateCategoryModel;
-use AdminCategories\DeleteCategoryModel;
+use CategoriesManagement\CategoryModel;
+use CategoriesManagement\AddCategoryModel;
+use CategoriesManagement\CategoryByIdModel;
+use CategoriesManagement\UpdateCategoryModel;
+use CategoriesManagement\DeleteCategoryModel;
 
 //Admin Sections
 
-use AdminSections\SectionModel;
+use SectionsManagement\SectionModel;
 
 //Admin Informations
-use AdminInformations\InformationModel;
-use AdminInformations\AddInformationModel;
-use AdminInformations\UpdateInformationModel;
-use AdminInformations\DeleteInformationModel;
+use InformationsManagement\InformationModel;
+use InformationsManagement\AddInformationModel;
+use InformationsManagement\UpdateInformationModel;
+use InformationsManagement\DeleteInformationModel;
 
 //Admin Social Networks
 
-use AdminSocialNetworks\SocialNetworkModel;
-use AdminSocialNetworks\AddSocialNetworkModel;
-use AdminSocialNetworks\UpdateSocialNetworkModel;
-use AdminSocialNetworks\DeleteSocialNetworkModel;
+use SocialNetworksManagement\SocialNetworkModel;
+use SocialNetworksManagement\AddSocialNetworkModel;
+use SocialNetworksManagement\UpdateSocialNetworkModel;
+use SocialNetworksManagement\DeleteSocialNetworkModel;
 
 //Admin Comments
-use AdminComments\CommentModel;
-use AdminComments\AddCommentModel;
+use CommentsManagement\CommentModel;
+use CommentsManagement\AddCommentModel;
 
 
 use Utils\AuthUtils;
