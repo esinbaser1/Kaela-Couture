@@ -28,12 +28,14 @@ class LoginController
         $password = isset($data['password']) ? strip_tags($data['password']) : null;
 
         // Check if email or password is missing
-        if (empty($email) || empty($password)) {
+        if (empty($email) || empty($password)) 
+        {
             return ["success" => false, "message" => "All fields are required."];
         }
 
         // Validate the email format
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+        {
             return ["success" => false, "message" => "Invalid credentials."];
         }
 
@@ -41,7 +43,8 @@ class LoginController
         $user = $this->model->getUserByEmail($email);
 
         // Verify the password and check if the user exists
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user && password_verify($password, $user['password'])) 
+        {
             // If credentials are valid, generate a JWT token
             $token = $this->token->generateToken($user['id'], $user['role'], $user['username'], $user['email']);
 

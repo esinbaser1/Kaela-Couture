@@ -5,41 +5,51 @@ use Controllers\SocialNetworksManagement\DeleteSocialNetworkController;
 use Controllers\SocialNetworksManagement\SocialNetworkController;
 use Controllers\SocialNetworksManagement\UpdateSocialNetworkController;
 
-function handleSocialNetworkRoutes($adminAction, $authMiddleware) {
+function socialNetworkRoutes($adminAction, $authMiddleware) {
+
+    $getSocialNetwork = new SocialNetworkController();
+    $addSocialNetwork = new AddSocialNetworkController();
+    $updateSocialNetwork = new UpdateSocialNetworkController();
+    $deleteSocialNetwork = new DeleteSocialNetworkController();
     
-    switch ($adminAction) {
+    switch ($adminAction) 
+    {
         case "getSocialNetwork":
-            $getSocialNetwork = new SocialNetworkController();
             return $getSocialNetwork->getSocialNetworks();
 
         case "getSocialNetworkById":
-            $getSocialNetworkById = new UpdateSocialNetworkController();
-            return $getSocialNetworkById->getSocialNetworkById();
+            return $updateSocialNetwork->getSocialNetworkById();
 
         case "addSocialNetwork":
             $authResult = $authMiddleware->verifyAccess('admin');
-            if ($authResult !== null) {
+            if ($authResult !== null) 
+            {
                 return $authResult;
-            } else {
-                $addSocialNetwork = new AddSocialNetworkController();
+            } 
+            else 
+            {
                 return $addSocialNetwork->addSocialNetwork();
             }
 
         case "updateSocialNetwork":
             $authResult = $authMiddleware->verifyAccess('admin');
-            if ($authResult !== null) {
+            if ($authResult !== null) 
+            {
                 return $authResult;
-            } else {
-                $updateSocialNetwork = new UpdateSocialNetworkController();
+            } 
+            else 
+            {
                 return $updateSocialNetwork->updateSocialNetwork();
             }
 
         case "deleteSocialNetwork":
             $authResult = $authMiddleware->verifyAccess('admin');
-            if ($authResult !== null) {
+            if ($authResult !== null) 
+            {
                 return $authResult;
-            } else {
-                $deleteSocialNetwork = new DeleteSocialNetworkController();
+            } 
+            else 
+            {
                 return $deleteSocialNetwork->deleteSocialNetwork();
             }
 

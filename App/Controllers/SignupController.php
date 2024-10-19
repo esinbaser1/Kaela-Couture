@@ -26,12 +26,14 @@ class SignupController
         $password = isset($data['password']) ? strip_tags($data['password']) : null;
 
         // Check if any required field is missing
-        if (empty($username) || empty($email) || empty($password)) {
+        if (empty($username) || empty($email) || empty($password)) 
+        {
             return ["success" => false, "message" => "All fields are required"];
         }
 
         // Validate the email format
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+        {
             return ["success" => false, "message" => "Invalid email"];
         }
 
@@ -48,7 +50,8 @@ class SignupController
         }
 
         // Validate the password strength
-        if (!$this->validatePassword($password)) {
+        if (!$this->validatePassword($password)) 
+        {
             return ["success" => false, "message" => "Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long."];
         }
 

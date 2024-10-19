@@ -5,41 +5,51 @@ use Controllers\InformationsManagement\DeleteInformationController;
 use Controllers\InformationsManagement\InformationController;
 use Controllers\InformationsManagement\UpdateInformationController;
 
-function handleInformationRoutes($adminAction, $authMiddleware) {
+function informationRoutes($adminAction, $authMiddleware) {
+
+    $getInformation = new InformationController();
+    $addInformation = new AddInformationController();
+    $updateInformation = new UpdateInformationController();
+    $deleteInformation = new DeleteInformationController();
     
-    switch ($adminAction) {
+    switch ($adminAction) 
+    {
         case "getInformation":
-            $getInformation = new InformationController();
             return $getInformation->getInformations();
 
         case "getInformationById":
-            $getInformationById = new UpdateInformationController();
-            return $getInformationById->getInformationById();
+            return $updateInformation->getInformationById();
 
         case "addInformation":
             $authResult = $authMiddleware->verifyAccess('admin');
-            if ($authResult !== null) {
+            if ($authResult !== null) 
+            {
                 return $authResult;
-            } else {
-                $addInformation = new AddInformationController();
+            } 
+            else 
+            {
                 return $addInformation->addInformation();
             }
 
         case "updateInformation":
             $authResult = $authMiddleware->verifyAccess('admin');
-            if ($authResult !== null) {
+            if ($authResult !== null) 
+            {
                 return $authResult;
-            } else {
-                $updateInformation = new UpdateInformationController();
+            } 
+            else 
+            {
                 return $updateInformation->updateInformation();
             }
 
         case "deleteInformation":
             $authResult = $authMiddleware->verifyAccess('admin');
-            if ($authResult !== null) {
+            if ($authResult !== null) 
+            {
                 return $authResult;
-            } else {
-                $deleteInformation = new DeleteInformationController();
+            } 
+            else 
+            {
                 return $deleteInformation->deleteInformation();
             }
 

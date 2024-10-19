@@ -16,11 +16,14 @@ class ProductController
     // Method to retrieve all products
     public function getProduct()
     {
-        try {
+        try 
+        {
             // Get product data from the model
             $product = $this->model->getProduct();
             return ["success" => true, "product" => $product];
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             // Return error message if exception occurs
             return ["success" => false, "message" => $e->getMessage()];
         }

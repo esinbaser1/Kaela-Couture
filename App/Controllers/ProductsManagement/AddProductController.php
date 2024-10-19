@@ -33,7 +33,8 @@ class AddProductController
         }
 
         // Check if the product name already exists in the database
-        if ($this->model->nameExist($productName)) {
+        if ($this->model->nameExist($productName)) 
+        {
             return ["success" => false, "message" => "This name is already used"];
         }
 
@@ -45,7 +46,8 @@ class AddProductController
         $tempImagePath = $imageLocation . basename($productImage['name']);
 
         // Move the uploaded file to the temporary path
-        if (!move_uploaded_file($productImage['tmp_name'], $tempImagePath)) {
+        if (!move_uploaded_file($productImage['tmp_name'], $tempImagePath)) 
+        {
             return ["success" => false, "message" => "Failed to move uploaded file"];
         }
 
@@ -54,12 +56,14 @@ class AddProductController
         $webpImagePath = $converter->convertToWebP($tempImagePath, $imageLocation, $productSlug, $productCategory);
 
         // Check if the WebP conversion was successful
-        if (!$webpImagePath) {
+        if (!$webpImagePath) 
+        {
             return ["success" => false, "message" => "Failed to convert image to WebP format"];
         }
 
         // Add the product to the database via the model
-        try {
+        try 
+        {
             $productId = $this->model->addProduct($productName, $productDescription, $productCategory, $productSection, $webpImagePath, $productSlug);
 
             // Rename the WebP file to include the product ID and category
@@ -67,7 +71,8 @@ class AddProductController
             $newWebpImagePath = $imageLocation . $newWebpFileName;
 
             // Rename the WebP file
-            if (!rename($webpImagePath, $newWebpImagePath)) {
+            if (!rename($webpImagePath, $newWebpImagePath)) 
+            {
                 return ["success" => false, "message" => "Failed to rename WebP image"];
             }
 
@@ -87,7 +92,9 @@ class AddProductController
 
             return ["success" => true, "message" => "Product added successfully", "product" => $newProduct];
 
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             return ["success" => false, "message" => $e->getMessage()];
         }
     }

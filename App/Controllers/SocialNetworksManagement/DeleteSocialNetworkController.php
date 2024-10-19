@@ -24,7 +24,8 @@ class DeleteSocialNetworkController
         $socialNetworkId = isset($data['socialNetworkId']) ? strip_tags($data['socialNetworkId']) : null;
 
         // Validate the input
-        if (empty($socialNetworkId)) {
+        if (empty($socialNetworkId)) 
+        {
             return ["success" => false, "message" => "Social network ID is missing"];
         }
 
@@ -32,9 +33,12 @@ class DeleteSocialNetworkController
         $rowCount = $this->model->deleteSocialNetwork($socialNetworkId);
 
         // Prepare the response based on the result from the model
-        if ($rowCount > 0) {
+        if ($rowCount > 0) 
+        {
             return ["success" => true, "message" => "Social network deleted successfully"];
-        } else {
+        } 
+        else 
+        {
             return ["success" => false, "message" => "Social network not found"];
         }
     }

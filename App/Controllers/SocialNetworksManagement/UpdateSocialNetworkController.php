@@ -19,15 +19,19 @@ class UpdateSocialNetworkController
         $socialNetworkId = isset($_GET['socialNetworkId']) ? strip_tags($_GET['socialNetworkId']) : null;
 
         // Validate input
-        if (empty($socialNetworkId)) {
+        if (empty($socialNetworkId)) 
+        {
             return ["success" => false, "message" => "Social network ID is missing"];
         }
 
         $socialNetwork = $this->model->getSocialNetworkById($socialNetworkId);
 
-        if ($socialNetwork) {
+        if ($socialNetwork) 
+        {
             return ["success" => true, "socialNetwork" => $socialNetwork];
-        } else {
+        } 
+        else 
+        {
             return ["success" => false, "message" => "Social network not found"];
         }
     }
@@ -44,12 +48,14 @@ class UpdateSocialNetworkController
         $url = isset($data['url']) ? trim(strip_tags($data['url'])) : null;
 
         // Validate input
-        if (empty($socialNetworkId) || empty($platform) || empty($url)) {
+        if (empty($socialNetworkId) || empty($platform) || empty($url)) 
+        {
             return ["success" => false, "message" => "All fields must be filled"];
         }
 
         // Check if the URL is valid
-        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+        if (!filter_var($url, FILTER_VALIDATE_URL)) 
+        {
             return ["success" => false, "message" => "Invalid URL"];
         }
 
@@ -57,14 +63,17 @@ class UpdateSocialNetworkController
         $existingSocialNetwork = $this->model->getSocialNetworkById($socialNetworkId);
 
         // Check if any changes were made
-        if ($existingSocialNetwork['platform'] === $platform && $existingSocialNetwork['url'] === $url) {
+        if ($existingSocialNetwork['platform'] === $platform && $existingSocialNetwork['url'] === $url) 
+        {
             return ["success" => false, "message" => "No changes detected"];
         }
 
         // Update the social network using the model
         $rowCount = $this->model->updateSocialNetwork($socialNetworkId, $platform, $url);
 
-        if ($rowCount > 0) {
+        // Send my data back to the front if a line is affected
+        if ($rowCount > 0) 
+        {
             return [
                 "success" => true,
                 "message" => "Social network updated successfully",
@@ -74,7 +83,9 @@ class UpdateSocialNetworkController
                     'url' => $url,
                 ]
             ];
-        } else {
+        } 
+        else 
+        {
             return ["success" => false, "message" => "No updates made"];
         }
     }

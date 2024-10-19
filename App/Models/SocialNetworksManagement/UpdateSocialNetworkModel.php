@@ -9,7 +9,7 @@ class UpdateSocialNetworkModel
 {
     protected $db;
 
-    // Constructor: Initializes the database connection
+    // Initializes the database connection
     public function __construct()
     {
         $database = new Database();

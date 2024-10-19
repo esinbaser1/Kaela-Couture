@@ -2,10 +2,13 @@
 
 use Controllers\SectionsManagement\SectionController;
 
-function handleSectionRoutes($adminAction) {
-    switch($adminAction) {
+function sectionRoutes($adminAction) 
+{
+    $getSection = new SectionController();
+
+    switch($adminAction) 
+    {
         case 'getSection' :
-            $getSection = new SectionController();
             return $getSection->getSections();
 
             default:

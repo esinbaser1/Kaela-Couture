@@ -25,12 +25,14 @@ class AddSocialNetworkController
         $url = isset($data['url']) ? trim(strip_tags($data['url'])) : null;
 
         // Validate input
-        if (empty($platform) || empty($url)) {
+        if (empty($platform) || empty($url)) 
+        {
             return ["success" => false, "message" => "Please complete all fields"];
         }
 
         // Check if the URL is valid
-        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+        if (!filter_var($url, FILTER_VALIDATE_URL)) 
+        {
             return ["success" => false, "message" => "Invalid URL"];
         }
 
@@ -46,7 +48,8 @@ class AddSocialNetworkController
         }
 
 
-        try {
+        try 
+        {
             // Use the model to insert the new social network
             $id = $this->model->insertSocialNetwork($platform, $url);
 
@@ -60,7 +63,9 @@ class AddSocialNetworkController
                     'url' => $url
                 ]
             ];
-        } catch (\PDOException $e) {
+        } 
+        catch (\PDOException $e) 
+        {
             // Return a failure response in case of a database error
             return ["success" => false, "message" => "Database error: " . $e->getMessage()];
         }

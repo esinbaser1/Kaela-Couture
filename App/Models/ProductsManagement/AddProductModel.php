@@ -4,7 +4,6 @@ namespace Models\ProductsManagement;
 
 use App\Database;
 use Lib\Slug;
-use Utils\ConvertToWebP;
 
 class AddProductModel
 {
@@ -34,7 +33,9 @@ class AddProductModel
 
             return $productId;
 
-        } catch (\PDOException $e) {
+        } 
+        catch (\PDOException $e) 
+        {
             throw new \Exception("Database error");
         }
     }
@@ -47,7 +48,7 @@ class AddProductModel
         $pdo->execute([$newWebpFileName, $productId]);
     }
 
-    // Private method to check if the product name already exists
+    // Method to check if the product name already exists
     public function nameExist($productName) 
     {
         $pdo = $this->db->prepare("SELECT COUNT(*) FROM product WHERE name = ?");

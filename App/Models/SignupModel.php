@@ -26,11 +26,11 @@ class SignupModel
         return $this->db->lastInsertId(); // Return the newly inserted user ID
     }
 
-
+    // function that checks if a name already exists
     public function existsInColumn($column, $value)
     {
-        $query = "SELECT COUNT(*) FROM user WHERE $column = ?";
-        $pdo = $this->db->prepare($query);
+        $request = "SELECT COUNT(*) FROM user WHERE $column = ?";
+        $pdo = $this->db->prepare($request);
         $pdo->execute([$value]);
         return $pdo->fetchColumn() > 0;
     }

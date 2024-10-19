@@ -15,14 +15,14 @@ class AddInformationModel
     }
 
     // Method to add information to the database
-    public function insertInformation($description, $mobile, $address)
+    public function insertInformation($description, $mobile, $email, $address)
     {
         try
         {
             // SQL query to insert new information
-            $request = "INSERT INTO information (description, mobile, address) VALUES (?, ?, ?)";
+            $request = "INSERT INTO information (description, mobile, email, address) VALUES (?, ?, ?, ?)";
             $pdo = $this->db->prepare($request); 
-            $pdo->execute([$description, $mobile, $address]);
+            $pdo->execute([$description, $mobile, $email, $address]);
 
             // Get the ID of the inserted information
             return $this->db->lastInsertId();

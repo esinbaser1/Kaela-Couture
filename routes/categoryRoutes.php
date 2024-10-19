@@ -1,46 +1,55 @@
 <?php
 
 use Controllers\CategoriesManagement\AddCategoryController;
-use Controllers\CategoriesManagement\CategoryByIdController;
 use Controllers\CategoriesManagement\CategoryController;
 use Controllers\CategoriesManagement\DeleteCategoryController;
 use Controllers\CategoriesManagement\UpdateCategoryController;
 
-function handleCategoryRoutes($adminAction, $authMiddleware) {
+function categoryRoutes($adminAction, $authMiddleware) {
+
+    $productCategory = new CategoryController();
+    $updateCategory = new UpdateCategoryController();
+    $addCategory = new AddCategoryController();
+    $deleteCategory = new DeleteCategoryController();
     
-    switch ($adminAction) {
+    switch ($adminAction) 
+    {
         case "getProductCategory":
-            $productCategory = new CategoryController();
             return $productCategory->getCategories();
 
         case "getCategoryById":
-            $productCategoryById = new UpdateCategoryController();
-            return $productCategoryById->getCategoryById();
+            return $updateCategory->getCategoryById();
 
         case "addCategory":
             $authResult = $authMiddleware->verifyAccess('admin');
-            if ($authResult !== null) {
+            if ($authResult !== null) 
+            {
                 return $authResult;
-            } else {
-                $addCategory = new AddCategoryController();
+            } 
+            else 
+            {
                 return $addCategory->addCategory();
             }
 
         case "updateCategory":
             $authResult = $authMiddleware->verifyAccess('admin');
-            if ($authResult !== null) {
+            if ($authResult !== null) 
+            {
                 return $authResult;
-            } else {
-                $updateCategory = new UpdateCategoryController();
+            } 
+            else 
+            {
                 return $updateCategory->updateCategory();
             }
 
         case "deleteCategory":
             $authResult = $authMiddleware->verifyAccess('admin');
-            if ($authResult !== null) {
+            if ($authResult !== null) 
+            {
                 return $authResult;
-            } else {
-                $deleteCategory = new DeleteCategoryController();
+            } 
+            else 
+            {
                 return $deleteCategory->deleteCategory();
             }
 

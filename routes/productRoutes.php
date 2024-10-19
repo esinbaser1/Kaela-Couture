@@ -5,41 +5,51 @@ use Controllers\ProductsManagement\DeleteProductController;
 use Controllers\ProductsManagement\ProductController;
 use Controllers\ProductsManagement\UpdateProductController;
 
-function handleProductRoutes($adminAction, $authMiddleware) {
+function productRoutes($adminAction, $authMiddleware) {
     
-    switch ($adminAction) {
+    $getProduct = new ProductController();
+    $addProduct = new AddProductController();
+    $updateProduct = new UpdateProductController();
+    $deleteProduct = new DeleteProductController();
+    
+    switch ($adminAction) 
+    {
         case "getProduct":
-            $getProduct = new ProductController();
             return $getProduct->getProduct();
             
         case "getProductById":
-            $getProductById = new UpdateProductController();
-            return $getProductById->getProductById();
+            return $updateProduct->getProductById();
             
         case "addProduct":
             $authResult = $authMiddleware->verifyAccess('admin');
-            if ($authResult !== null) {
+            if ($authResult !== null) 
+            {
                 return $authResult;
-            } else {
-                $addProduct = new AddProductController();
+            } 
+            else 
+            {
                 return $addProduct->addProduct();
             }
 
         case "updateProduct":
             $authResult = $authMiddleware->verifyAccess('admin');
-            if ($authResult !== null) {
+            if ($authResult !== null) 
+            {
                 return $authResult;
-            } else {
-                $updateProduct = new UpdateProductController();
+            } 
+            else 
+            {
                 return $updateProduct->updateProduct();
             }
 
         case "deleteProduct":
             $authResult = $authMiddleware->verifyAccess('admin');
-            if ($authResult !== null) {
+            if ($authResult !== null) 
+            {
                 return $authResult;
-            } else {
-                $deleteProduct = new DeleteProductController();
+            } 
+            else 
+            {
                 return $deleteProduct->deleteProduct();
             }
 

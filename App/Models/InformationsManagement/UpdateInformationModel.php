@@ -26,12 +26,22 @@ class UpdateInformationModel
     }
 
     // Method to update existing information in the database
-    public function updateInformation($informationId, $description, $mobile, $address)
+    public function updateInformation($informationId, $description, $mobile, $email, $address)
     {
-        $request = "UPDATE information SET description = ?, mobile = ?, address = ? WHERE id = ?";
-        $pdo = $this->db->prepare($request);
-        $pdo->execute([$description, $mobile, $address, $informationId]);
+        try 
+        {
+            $request = "UPDATE information SET description = ?, mobile = ?, email = ?, address = ? WHERE id = ?";
+            $pdo = $this->db->prepare($request);
+            $pdo->execute([$description, $mobile, $email, $address, $informationId]);
 
-        return $pdo->rowCount(); // Return the number of affected rows
+            // Return the number of affected rows
+            return $pdo->rowCount() > 0;
+        }
+        catch (\PDOException $e) 
+        {
+            // Throw an exception to be handled by the controller
+            throw new \Exception("Database error: " . $e->getMessage());
+        }
     }
+
 }

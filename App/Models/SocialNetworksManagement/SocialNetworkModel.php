@@ -19,7 +19,8 @@ class SocialNetworkModel
     // Method to retrieve all social networks from the database
     public function getSocialNetwork()
     {
-        try {
+        try 
+        {
             // SQL query to select all social networks 
             $request = "SELECT * FROM social_network";
             $pdo = $this->db->query($request);
@@ -28,7 +29,9 @@ class SocialNetworkModel
             // Return the list of social networks with a success response
             return ["success" => true, "socialNetworks" => $socialNetworks];
             
-        } catch (\PDOException $e) {
+        } 
+        catch (\PDOException $e) 
+        {
             // Return a failure response
             return ["success" => false, "message" => "Database error"];
         }

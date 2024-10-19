@@ -2,7 +2,6 @@
 
 require_once 'vendor/autoload.php';
 
-// Inclusion des fichiers de routes
 require_once 'routes/productRoutes.php';
 require_once 'routes/categoryRoutes.php';
 require_once 'routes/informationRoutes.php';
@@ -27,8 +26,9 @@ $addComment = new AddCommentController();
 $action = $_REQUEST['action'] ?? null;
 $response = ["success" => false, "message" => "Action not found"];
 
-// Gestion des actions non-admin
-switch ($action) {
+// Management of non-admin actions
+switch ($action) 
+{
     case "signup":
         $response = $signup->signup();
         break;
@@ -43,9 +43,11 @@ switch ($action) {
 
     case "getCommentsByProduct":
         $productId = $_REQUEST['productDetailId'] ?? null;
-        if ($productId) {
+        if ($productId) 
+        {
             $response = $comment->getCommentsByProduct($productId);
-        } else {
+        } else 
+        {
             $response = ["success" => false, "message" => "Product ID not provided"];
         }
         break;
@@ -54,16 +56,17 @@ switch ($action) {
         $response = $addComment->addComment();
         break;
 
-
+    // Managing admin actions
     default:
         $adminAction = $_REQUEST['adminAction'] ?? null;
 
-        if ($adminAction) {
-            $response = handleProductRoutes($adminAction, $authMiddleware) ??
-                handleCategoryRoutes($adminAction, $authMiddleware) ??
-                handleInformationRoutes($adminAction, $authMiddleware) ??
-                handleSocialNetworkRoutes($adminAction, $authMiddleware) ??
-                handleSectionRoutes($adminAction);
+        if ($adminAction) 
+        {
+            $response = productRoutes($adminAction, $authMiddleware) ??
+                categoryRoutes($adminAction, $authMiddleware) ??
+                informationRoutes($adminAction, $authMiddleware) ??
+                socialNetworkRoutes($adminAction, $authMiddleware) ??
+                sectionRoutes($adminAction);
         }
         break;
 }

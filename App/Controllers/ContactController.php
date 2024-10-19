@@ -27,31 +27,37 @@ class ContactController
         $userId = isset($data['userId']) ? $data['userId'] : null;
 
         // Check if the object and message fields are not empty
-        if (empty($object) || empty($message)) {
+        if (empty($object) || empty($message)) 
+        {
             return ["success" => false, "message" => "Subject and message are required"];
         }
 
         // If the user is logged in, retrieve the user's email from the database using their userId
-        if ($userId) {
+        if ($userId)
+        {
             $userEmail = $this->model->getUserEmailById($userId);
 
             // If a user email is found, use it instead of the one provided in the request
-            if ($userEmail) {
+            if ($userEmail) 
+            {
                 $email = $userEmail;
             }
         }
 
         // If the email is still empty or invalid, return an error
-        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) 
+        {
             return ["success" => false, "message" => "A valid email is required"];
         }
 
-        try {
+        try 
+        {
             // Insert the contact message into the database
             $rowCount = $this->model->addContactMessage($email, $object, $message, $userId);
 
             // Check if the message was successfully inserted
-            if ($rowCount > 0) {
+            if ($rowCount > 0) 
+            {
                 // Configure PHPMailer to send the email
                 $mail = new PHPMailer(true);
                 $mail->isSMTP();
@@ -72,17 +78,26 @@ class ContactController
                 $mail->Body = nl2br($message);
 
                 // Attempt to send the email
-                if ($mail->send()) {
+                if ($mail->send()) 
+                {
                     return ["success" => true, "message" => "Email sent successfully"];
-                } else {
+                } 
+                else 
+                {
                     throw new PHPMailerException($mail->ErrorInfo);
                 }
-            } else {
+            } 
+            else 
+            {
                 return ["success" => false, "message" => "Error occurred while saving the message"];
             }
-        } catch (\PDOException $e) {
+        } 
+        catch (\PDOException $e) 
+        {
             return ["success" => false, "message" => "Database error: " . $e->getMessage()];
-        } catch (PHPMailerException $e) {
+        } 
+        catch (PHPMailerException $e) 
+        {
             return ["success" => false, "message" => "Error sending email: " . $e->getMessage()];
         }
     }
