@@ -16,15 +16,12 @@ class DeleteProductController
     // Method to handle the product deletion request
     public function deleteProduct()
     {
-        // Retrieve the input data from the HTTP request and decode the JSON
-        $input = file_get_contents("php://input");
-        $data = json_decode($input, true);
 
         // Sanitize and retrieve the product ID from the input data
-        $productId = isset($data['productId']) ? strip_tags($data['productId']) : null;
+        $productId = isset($_GET['productId']) ? strip_tags($_GET['productId']) : null;
 
         // If the product ID is missing, return an error response
-        if (!$productId) 
+        if (empty($productId))
         {
             return ["success" => false, "message" => "Product ID missing"];
         }

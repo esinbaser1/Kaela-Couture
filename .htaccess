@@ -31,7 +31,7 @@ RewriteRule ^getProductById/([0-9]+)$ index.php?adminAction=getProductById&produ
 RewriteRule ^updateProduct$ index.php?adminAction=updateProduct [L,QSA]
 
 # URL rewriting for delete products (admin)
-RewriteRule ^deleteProduct$ index.php?adminAction=deleteProduct [L,QSA]
+RewriteRule ^deleteProduct/([0-9]+)$ index.php?adminAction=deleteProduct&productId=$1 [L,QSA]
 
 
 # ADMIN - CATEGORIES -------------------------------------------------------
@@ -48,8 +48,9 @@ RewriteRule ^addCategory$ index.php?adminAction=addCategory [L,QSA]
 # URL rewriting for get product categories (admin)
 RewriteRule ^updateCategory$ index.php?adminAction=updateCategory [L,QSA]
 
-# URL rewriting for get categories by id (admin)
-RewriteRule ^deleteCategory$ index.php?adminAction=deleteCategory [L,QSA]
+# URL rewriting for deleting a category by id (admin)
+RewriteRule ^deleteCategory/([0-9]+)$ index.php?adminAction=deleteCategory&categoryId=$1 [L,QSA]
+
 
 
 # ADMIN - SECTIONS  -------------------------------------------------------
@@ -73,7 +74,7 @@ RewriteRule ^addInformation$ index.php?adminAction=addInformation [L,QSA]
 RewriteRule ^updateInformation$ index.php?adminAction=updateInformation [L,QSA]
 
 # URL rewriting for delete informations (admin)
-RewriteRule ^deleteInformation$ index.php?adminAction=deleteInformation [L,QSA]
+RewriteRule ^deleteInformation/([0-9]+)$ index.php?adminAction=deleteInformation&informationId=$1 [L,QSA]
 
 
 # ADMIN - SOCIAL NETWORKS -------------------------------------------------------
@@ -93,7 +94,7 @@ RewriteRule ^addSocialNetwork$ index.php?adminAction=addSocialNetwork [L,QSA]
 RewriteRule ^updateSocialNetwork$ index.php?adminAction=updateSocialNetwork [L,QSA]
 
 # URL rewriting for delete social network (admin)
-RewriteRule ^deleteSocialNetwork$ index.php?adminAction=deleteSocialNetwork [L,QSA]
+RewriteRule ^deleteSocialNetwork/([0-9]+)$  index.php?adminAction=deleteSocialNetwork&socialNetworkId=$1 [L,QSA]
 
 
 # ADMIN - COMMENTS -------------------------------------------------------

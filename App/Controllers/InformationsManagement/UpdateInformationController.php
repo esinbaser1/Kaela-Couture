@@ -58,11 +58,13 @@ class UpdateInformationController
             return ["success" => false, "message" => "At least one field must be filled"];
         }
 
-         // Validate the email format
-         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+       
+        // Validate the email format only if email is not empty
+        if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) 
         {
             return ["success" => false, "message" => "Invalid email"];
         }
+
 
         // Check that the telephone number is in the correct format
         if (!empty($mobile) && !preg_match('/^\+?[0-9]*$/', $mobile)) 

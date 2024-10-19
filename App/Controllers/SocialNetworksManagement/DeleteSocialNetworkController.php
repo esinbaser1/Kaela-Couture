@@ -16,14 +16,10 @@ class DeleteSocialNetworkController
     // Method to handle the deletion of a social network
     public function deleteSocialNetwork()
     {
-        // Retrieve the input data from the HTTP request (JSON format)
-        $input = file_get_contents("php://input");
-        $data = json_decode($input, true);
+        // Sanitize and get the social network ID from the HTTP request
+        $socialNetworkId = isset($_GET['socialNetworkId']) ? strip_tags($_GET['socialNetworkId']) : null;
 
-        // Sanitize and get the social network ID from the input data
-        $socialNetworkId = isset($data['socialNetworkId']) ? strip_tags($data['socialNetworkId']) : null;
-
-        // Validate the input
+        // Check if the ID is missing
         if (empty($socialNetworkId)) 
         {
             return ["success" => false, "message" => "Social network ID is missing"];

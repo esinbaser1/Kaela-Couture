@@ -17,14 +17,10 @@ class DeleteCategoryController
     // Method to handle the logic for deleting a category
     public function deleteCategory()
     {
-        // Retrieve the input data from the HTTP request and decode it from JSON
-        $input = file_get_contents("php://input");
-        $data = json_decode($input, true);
+         // Sanitize and get the social network ID from the HTTP request
+        $categoryId = isset($_GET['categoryId']) ? strip_tags($_GET['categoryId']) : null;
 
-        // Sanitize and retrieve the category ID from the input data
-        $categoryId = isset($data['categoryId']) ? strip_tags($data['categoryId']) : null;
-
-        // Check if the category ID is missing
+        // Check if the ID is missing
         if (empty($categoryId)) 
         {
             return ["success" => false, "message" => "Category ID missing"];

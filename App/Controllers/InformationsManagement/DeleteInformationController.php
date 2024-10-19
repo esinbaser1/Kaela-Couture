@@ -17,12 +17,10 @@ class DeleteInformationController
     // Method to handle the deletion of information
     public function deleteInformation()
     {
-        // Retrieves data from the HTTP request
-        $input = file_get_contents("php://input");
-        $data = json_decode($input, true);
+        // Sanitize and get the social network ID from the HTTP request
+        $informationId = isset($_GET['informationId']) ? strip_tags($_GET['informationId']) : null;
 
-        // Sanitizes and checks if the information ID is provided
-        $informationId = isset($data['informationId']) ? strip_tags($data['informationId']) : null;
+        // Check if the ID is missing
         if (empty($informationId)) 
         {
             return ["success" => false, "message" => "Information ID missing"];
